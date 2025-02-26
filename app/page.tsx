@@ -2,22 +2,13 @@
 
 
 'use client'
-import React from 'react'
-import styles from './home.module.css'
 import Image from 'next/image'
+import styles from './home.module.css'
 
 const Home = () => {
   const welcome = 'WELCOME'
   const note = `
     Hello and welcome! I'm Sakeasi Baleiwai Komaidrakulu, a dedicated System Administrator with a passion for Web Development and Artificial Intelligence. This website is a space where I showcase my journey, skills, and achievements.`
-
-const checkList = [
-  {icon:'✅', list: 'My Certifications – Proof of my expertise and continuous learning.'},
-  {icon:'✅', list: 'Education & Training – The foundation of my technical knowledge.'},
-  {icon:'✅', list: 'Professional Experience – Insights into my work and contributions.'},
-  {icon:'✅', list: 'Projects & Skills – A showcase of my web development and AI journey.'},
-  {icon:'✅', list: 'Gallery & Highlights – A glimpse into my achievements and milestones.'},
-]
 
   return (
     <div className='space-y-5 items-center justify-center w-full '>
