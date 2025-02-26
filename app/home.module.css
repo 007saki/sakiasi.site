@@ -1,0 +1,52 @@
+
+
+@keyframes fadeIn  {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .letter {
+    opacity: 0;
+    display: inline-block;
+    animation: fadeIn 0.5s forwards;
+  }
+
+  @keyframes slideup {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .slideup{
+    opacity: 0;
+    display: inline-block;
+    animation: slideup 1.5s forwards;
+  }
+
+  @keyframes note {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .note{
+    opacity: 0;
+    display: inline-block;
+    animation: note 1.5 forwards;
+    padding: 1px;
+  }
+  

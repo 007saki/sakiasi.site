@@ -21,9 +21,8 @@ const Navbar = () => {
         {label:'Photo', href:'/photo', icon:<MdOutlineAddAPhoto />},
     ]
 
-  return (
-    <nav className='border-r md:h-lvh'>
-      <div className='md:hidden border-b h-10 flex items-center px-10'>
+    const DropdownComponent=()=>{
+      return (
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
             <Button variant="ghost">
@@ -38,6 +37,13 @@ const Navbar = () => {
             )}
           </DropdownMenu.Content>
         </DropdownMenu.Root>
+      )
+    }
+
+  return (
+    <nav className='border-r md:h-lvh'>
+      <div className='md:hidden border-b h-10 flex items-center px-5'>
+        <DropdownComponent/>
       </div>
       <div className='hidden md:block'>
         <ul className='mt-10'>

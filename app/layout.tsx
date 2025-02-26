@@ -31,8 +31,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Theme className="md:flex">
-          <Navbar/>
-          <main>
+            <Navbar/>
+          <main className="w-full flex items-start justify-center">
             {children}
           </main>
         </Theme>
