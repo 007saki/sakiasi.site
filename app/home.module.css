@@ -10,6 +10,9 @@
       transform: translateX(0);
     }
   }
+
+  
+  
   
   .letter {
     opacity: 0;
@@ -48,5 +51,22 @@
     display: inline-block;
     animation: note 1.5 forwards;
     padding: 1px;
+  }
+
+  @keyframes getStarted {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .getStarted{
+    opacity: 1;
+    display: inline-block;
+    animation: getStarted 5s forwards;
+    display: flex;
   }
   

@@ -2,45 +2,45 @@
 
 
 'use client'
-import Image from 'next/image'
-import styles from './home.module.css'
+import { Button } from '@radix-ui/themes';
+import { motion } from "motion/react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { MdArrowForward } from 'react-icons/md';
+import { TypeAnimation } from 'react-type-animation';
 
 const Home = () => {
   const welcome = 'WELCOME'
-  const note = `
-    Hello and welcome! I'm Sakeasi Baleiwai Komaidrakulu, a dedicated System Administrator with a passion for Web Development and Artificial Intelligence. This website is a space where I showcase my journey, skills, and achievements.`
-
   return (
-    <div className='space-y-5 items-center justify-center w-full '>
-      <h1 className='text-5xl flex justify-center mt-10'>
-        {welcome.split('').map((char,index)=>
-          <span key={index} className={styles.letter} style={{animationDelay: `${index * 0.2}s`}}>{char}</span>
-        )}
-      </h1>
-      <p className='justify-center flex'>
-        <span className={styles.slideup} style={{animationDelay: `${1.5}s`}}>
-          <Image className='rounded-lg' alt='sakiasi' src={'/sakiasi.JPG'} width={200} height={200} />
-        </span>
-      </p>
-      <p className="p-2" style={{ wordWrap: "break-word", overflowWrap: "break-word" }}>
-        {note.split(" ").map((word, wordIndex) => (
-          <span key={wordIndex} style={{ display: "inline-block", marginRight: "5px" }}>
-            {word.split("").map((char, charIndex) => (
-              <span 
-                key={charIndex} 
-                className={styles.note} 
-                style={{ animationDelay: `${(wordIndex * 5 + charIndex) * 0.05}s`, display: "inline-block" }}
-              >
-                {char}
-              </span>
-            ))}
-          </span>
-        ))}
-      </p>
-
-
+    <div className=' flex-col p-5 flex-grow flex items-center justify-around '>
+      <div>
+        <h1 className='text-5xl text-center flex'>
+          <TypeAnimation
+            sequence={[
+              welcome,
+              2000,
+            ]}
+            repeat={1}
+            />
+          </h1>
+      </div>
+        <div>
+          <motion.div
+            initial={{ translateX: 20}}
+            animate={{ translateX: 0}}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+          >
+            <Image src={'/sakiasi.JPG'} alt='myphoto' height={200} width={200}/>
+        </motion.div>
+        </div>
+        <div>
+          <Link href={'/education'}>
+            <Button>Explore Portfolio <MdArrowForward/></Button>
+          </Link>
+        </div>
     </div>
   )
 }
 
-export default Home
+export default Home;

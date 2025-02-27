@@ -30,17 +30,26 @@ export default function RootLayout({
   }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}>
-        <Theme className="md:flex h-screen">
-          <div className="hidden md:block">
-            <Navbar/>
-          </div>
-          <main className="h-screen flex flex-col flex-grow ">
-            <div className="md:hidden">
-              <Navbar/>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Theme>
+          <div className="flex h-screen">
+            {/* Sidebar - Only visible on md+ */}
+            <div className="hidden md:block bg-orange-300">
+              <Navbar />
             </div>
-              {children}
-          </main>
+
+            {/* Main Content Area */}
+            <main className="flex-1 bg-purple-500">
+              
+              {/* Top Navbar - Visible only on small screens */}
+              <div className="md:hidden">
+                <Navbar />
+              </div>
+              <div className="p-4">
+                {children}
+              </div>
+            </main>
+          </div>
         </Theme>
       </body>
     </html>

@@ -41,12 +41,12 @@ const Navbar = () => {
     }
 
   return (
-    <nav className='border-r md:h-lvh'>
-      <div className='md:hidden border-b h-10 flex items-center px-5'>
+    <nav className='border-r'>
+      <div className='md:hidden h-10 flex border-b items-center px-5'>
         <DropdownComponent/>
       </div>
-      <div className='hidden md:block'>
-        <ul className='mt-10'>
+      <div className='hidden md:block mt-10'>
+        <ul>
             {links.map(link=>
             <Link className='flex h-10 hover:bg-purple-500 items-center p-5 transition-colors gap-2' href={link.href} key={link.href}>{link.icon}{link.label}</Link>
           )}
