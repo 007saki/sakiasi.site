@@ -2,9 +2,6 @@
 
 'use client'
 import Image from 'next/image';
-import { GoProject } from 'react-icons/go';
-import { IoCodeWorking } from 'react-icons/io5';
-import { Md1K, MdScatterPlot, MdSchedule, MdSchool, MdWork, MdWorkspacesFilled } from 'react-icons/md';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
