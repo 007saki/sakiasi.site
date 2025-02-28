@@ -5,6 +5,7 @@ import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeli
 import 'react-vertical-timeline-component/style.min.css';
 import Image from 'next/image';
 import { FaLinkedin } from 'react-icons/fa';
+import { MdStar } from 'react-icons/md';
 
 
 const Education = () => {
@@ -71,7 +72,9 @@ const Education = () => {
               <li>Project Management</li>
             </ol>
           </VerticalTimelineElement>
-
+          <VerticalTimelineElement
+            iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
+            icon={<MdStar />}/>
       </VerticalTimeline>
     </div>
   )
