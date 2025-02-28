@@ -31,6 +31,7 @@ const Education = () => {
 
         <VerticalTimelineElement
           contentStyle={{ background: 'rgb(33, 150, 243)'}}
+          contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
           className="vertical-timeline-element--work"
           date="2024"
           iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
@@ -48,6 +49,7 @@ const Education = () => {
         </VerticalTimelineElement>
 
         <VerticalTimelineElement
+          contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
           contentStyle={{ background: 'rgb(33, 150, 243)'}}
           className="vertical-timeline-element--work"
           date="2023"
@@ -56,7 +58,7 @@ const Education = () => {
         >
           <h3 className="vertical-timeline-element-title">Completed Online Certificate</h3>
           <h4 className="text-sm italic">LinkedIn Learning</h4>
-          <ol className='list-decimal md:p-2'>
+          <ol className='list-decimal p-2'>
             <li>IT Support</li>
             <li>Cybersecurity</li>
             <li>Cybersecurity with Cloud Computing</li>
