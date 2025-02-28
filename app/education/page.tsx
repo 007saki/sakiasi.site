@@ -50,6 +50,7 @@ const Education = () => {
         </VerticalTimelineElement>
 
         <VerticalTimelineElement
+          contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
           contentStyle={{ background: 'rgb(33, 150, 243)'}}
           className="vertical-timeline-element--work"
           date="2023"
@@ -73,9 +74,10 @@ const Education = () => {
                 <li>Network Security</li>
                 <li>Project Management</li>
               </ol>
-        </VerticalTimelineElement>
+            </VerticalTimelineElement>
         
         <VerticalTimelineElement
+          contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
           contentStyle={{ background: 'rgb(33, 150, 243)'}}
           className="vertical-timeline-element--work"
           date="2023"
