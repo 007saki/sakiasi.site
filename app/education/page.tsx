@@ -31,32 +31,44 @@ const Education = () => {
 
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          date="2023 - 2024"
+          date="2024"
           iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
           icon={<FaLinkedin />}
         >
           <h3 className="vertical-timeline-element-title">Completed Online Certificate</h3>
           <h4 className="text-sm italic">LinkedIn Learning</h4>
-          <ol className='list-decimal px-10'>
-            <li>System Administration</li>
-            <li>Cybersecurity</li>
-            <li>Network Security</li>
-            <li>Project Management</li>
+          <ol className='list-decimal px-10 mb-2'>
+            <li>Full-Stack Web Developer</li>
+            <li>JavaScript Essential</li>
+            <li>Learning ECMAScript 6+</li>
+            <li>Learning REST APIs</li>
+            <li>React Essential</li>
           </ol>
         </VerticalTimelineElement>
+
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          date="2016 - 2022"
-          iconStyle={{ background: 'rgb(33, 150, 243)', display:'flex', justifyContent:'center', alignItems:'center'  }}
-          icon={<Image alt='police' src={'/police_logo.png'} width={40} height={40} />}
+          date="2023"
+          iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
+          icon={<FaLinkedin />}
         >
-          <h3 className="vertical-timeline-element-title">Fiji Police Force</h3>
-          <h4 className="text-sm italic">System Administrator at Forensic Science Services</h4>
-          <ol className='list-disc px-10'>
-            <li>Managed servers & networks</li>
-            <li>Handled cybersecurity & data protection</li>
-            <li>Provided technical support for forensic teams</li>
-            <li>Maintained forensic software & databases</li>
+          <h3 className="vertical-timeline-element-title">Completed Online Certificate</h3>
+          <h4 className="text-sm italic">LinkedIn Learning</h4>
+          <ol className='list-decimal px-10 mb-2'>
+            <li>IT Support</li>
+            <li>Cybersecurity</li>
+            <li>Cybersecurity with Cloud Computing</li>
+            <li>Ethics in Information Security</li>
+            <li>IT Security Foundations Network Security</li>
+            <li>IT Security Foundations Operating System Security</li>
+            <li>IT Service Management</li>
+            <li>Learning Threat Modeling for Security Professionals</li>
+            <li>Network Administration</li>
+            <li>Networking Foundations</li>
+            <li>Project Management Foundations</li>
+            <li>Windows 10 for IT Support</li>
+            <li>Network Security</li>
+            <li>Project Management</li>
           </ol>
         </VerticalTimelineElement>
 
