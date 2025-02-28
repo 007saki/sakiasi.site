@@ -1,0 +1,40 @@
+@keyframes topcard {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.topcard {
+    width: 60%;
+    padding: 5px;
+    border-radius: 5px;
+    border-top-right-radius: 20px;
+    border: 1px solid black;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    background: lightblue;
+    animation: topcard 1.5s forwards;
+    transition: transform 0.3s ease-in-out; /* Hover transition */
+}
+
+.topcard:hover {
+    transform: translateX(20px);
+}
+
+@media (max-width: 768px) {
+    .topcard {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .topcard {
+        width: 100%;
+    }
+}
