@@ -49,31 +49,30 @@ const Education = () => {
         </VerticalTimelineElement>
 
         <VerticalTimelineElement
-          contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
           contentStyle={{ background: 'rgb(33, 150, 243)'}}
           className="vertical-timeline-element--work"
           date="2023"
           iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
           icon={<FaLinkedin />}
-        >
-          <h3 className="vertical-timeline-element-title">Completed Online Certificate</h3>
-          <h4 className="text-sm italic">LinkedIn Learning</h4>
-          <ol className='list-decimal p-2'>
-            <li>IT Support</li>
-            <li>Cybersecurity</li>
-            <li>Cybersecurity with Cloud Computing</li>
-            <li>Ethics in Information Security</li>
-            <li>IT Security Foundations Network Security</li>
-            <li>IT Security Foundations Operating System Security</li>
-            <li>IT Service Management</li>
-            <li>Learning Threat Modeling for Security Professionals</li>
-            <li>Network Administration</li>
-            <li>Networking Foundations</li>
-            <li>Project Management Foundations</li>
-            <li>Windows 10 for IT Support</li>
-            <li>Network Security</li>
-            <li>Project Management</li>
-          </ol>
+          iconClassName='hidden'>
+            <h3 className="vertical-timeline-element-title">Completed Online Certificate</h3>
+            <h4 className="text-sm italic">LinkedIn Learning</h4>
+              <ol className='list-decimal px-10 p-2'>
+                <li>IT Support</li>
+                <li>Cybersecurity</li>
+                <li>Cloud Computing</li>
+                <li>Ethics in Information Security</li>
+                <li>Network Security Foundation</li>
+                <li>Operating System Security</li>
+                <li>IT Service Management</li>
+                <li>Threat Modeling</li>
+                <li>Network Administration</li>
+                <li>Networking Foundations</li>
+                <li>Project Management</li>
+                <li>Windows 10 for IT Support</li>
+                <li>Network Security</li>
+                <li>Project Management</li>
+              </ol>
         </VerticalTimelineElement>
 
       </VerticalTimeline>
