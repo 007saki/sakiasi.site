@@ -32,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}>
         <Theme className="md:flex h-screen">
-          <div className="hidden md:block">
+          <div className="hidden md:block border-r">
             <Navbar/>
           </div>
           <main className="h-screen flex flex-col flex-grow ">
