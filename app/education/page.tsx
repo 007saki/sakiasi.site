@@ -45,6 +45,7 @@ const Education = () => {
             <li>Learning ECMAScript 6+</li>
             <li>Learning REST APIs</li>
             <li>React Essential</li>
+            <li>DevOps Foundations</li>
           </ol>
         </VerticalTimelineElement>
 
@@ -74,7 +75,24 @@ const Education = () => {
                 <li>Project Management</li>
               </ol>
         </VerticalTimelineElement>
-
+        
+        <VerticalTimelineElement
+          contentStyle={{ background: 'rgb(33, 150, 243)'}}
+          className="vertical-timeline-element--work"
+          date="2023"
+          iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
+          icon={<FaLinkedin />}
+          iconClassName='hidden'>
+            <h3 className="vertical-timeline-element-title">Completed Online Certificate</h3>
+            <h4 className="text-sm italic">LinkedIn Learning</h4>
+              <ol className='list-decimal px-10 p-2'>
+                <li>Data Literacy</li>
+                <li>Data Analytics Foundations</li>
+                <li>Excel Data Analysis</li>
+                <li>Power BI Essential</li>
+                <li>Data Literacy</li>
+              </ol>
+        </VerticalTimelineElement>
       </VerticalTimeline>
     </div>
   )
