@@ -49,7 +49,7 @@ const Education = () => {
 
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            date="2024"
+            date="2023"
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
             icon={<FaLinkedin />}
           >

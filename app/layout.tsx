@@ -35,7 +35,7 @@ export default function RootLayout({
           <div className="hidden md:block border-r">
             <Navbar/>
           </div>
-          <main className="flex flex-col flex-grow ">
+          <main className="h-screen overflow-y-auto flex flex-col flex-grow ">
             <div className="md:hidden">
               <Navbar/>
             </div>
