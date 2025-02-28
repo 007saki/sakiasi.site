@@ -1,10 +1,10 @@
 
 
 'use client'
-import Image from 'next/image';
-import { FaLinkedin } from 'react-icons/fa';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
+import Image from 'next/image';
+import { FaLinkedin } from 'react-icons/fa';
 
 
 const Education = () => {
@@ -61,14 +61,7 @@ const Education = () => {
             <li>Ethics in Information Security</li>
             <li>IT Security Foundations Network Security</li>
             <li>IT Security Foundations Operating System Security</li>
-            <li>IT Service Management</li>
-            <li>Learning Threat Modeling for Security Professionals</li>
-            <li>Network Administration</li>
-            <li>Networking Foundations</li>
-            <li>Project Management Foundations</li>
-            <li>Windows 10 for IT Support</li>
-            <li>Network Security</li>
-            <li>Project Management</li>
+            
           </ol>
         </VerticalTimelineElement>
 
