@@ -54,8 +54,7 @@ const Education = () => {
           className="vertical-timeline-element--work"
           date="2023"
           iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
-          icon={<FaLinkedin />}
-          iconClassName='hidden'>
+          icon={<FaLinkedin />}>
             <h3 className="vertical-timeline-element-title">Completed Online Certificate</h3>
             <h4 className="text-sm italic">LinkedIn Learning</h4>
               <ol className='list-decimal px-10 p-2'>
@@ -81,8 +80,7 @@ const Education = () => {
           className="vertical-timeline-element--work"
           date="2023"
           iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
-          icon={<FaLinkedin />}
-          iconClassName='hidden'>
+          icon={<FaLinkedin />}>
             <h3 className="vertical-timeline-element-title">Completed Online Certificate</h3>
             <h4 className="text-sm italic">LinkedIn Learning</h4>
               <ol className='list-decimal px-10 p-2'>
