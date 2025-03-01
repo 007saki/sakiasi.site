@@ -41,7 +41,7 @@ const Navbar = () => {
     }
 
   return (
-    <nav>
+    <nav >
       <div className='md:hidden h-10 flex border-b items-center px-5'>
         <DropdownComponent/>
       </div>

@@ -31,7 +31,7 @@ const Home = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 2 }}
           >
-            <Image src={'/sakiasi.JPG'} alt='myphoto' height={200} width={200}/>
+            <Image className='rounded-3xl' src={'/sakiasi.JPG'} alt='myphoto' height={200} width={200}/>
         </motion.div>
         </div>
         <div>

@@ -1,0 +1,42 @@
+
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  posts   Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  Int?
+}
+
+model Certificate {
+  id Int @id @default(autoincrement())
+  title String
+  start_time DateTime @default(now())
+  end_time DateTime @default(now())
+  status Status @default(COMPLETE)
+}
+
+enum Status {
+  COMPLETE
+  IN_PROGRESS
+}
+

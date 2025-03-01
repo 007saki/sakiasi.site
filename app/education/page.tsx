@@ -1,10 +1,10 @@
 
 
 'use client'
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import 'react-vertical-timeline-component/style.min.css';
 import Image from 'next/image';
 import { FaLinkedin } from 'react-icons/fa';
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 
 
 const Education = () => {
@@ -13,14 +13,14 @@ const Education = () => {
       <VerticalTimeline>
         <VerticalTimelineElement
             contentStyle={{ background: 'rgb(33, 150, 243)'}}
-            date="2025 - present"
-            className="vertical-timeline-element--work"
             contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+            className="vertical-timeline-element--work"
+            date="2025 - present"
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', }}
             icon={<Image className='rounded-xl' alt='sakiasi' src={'/sakiasi.JPG'} width={100} height={100} />}
           >
             <h3 className="vertical-timeline-element-title">Learning and Building Apps</h3>
-            <h4 className="italic text-sm">Suva, Fiji Island</h4>
+            <h4 className="vertical-timeline-element-subtitle italic text-sm">Suva, Fiji Island</h4>
             <p>
               Currently I am learning to become a Full-Stack Web Developer, specializing in Next.js. 
               I focus on building dynamic, user-friendly web applications, 
