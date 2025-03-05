@@ -28,14 +28,15 @@ const Certificate = () => {
     await axios.post('/api/certificate', formattedData);
 };
 
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='gap-5 flex flex-col items-center justify-center h-screen'>
-      <Card className='p-4 w-3/4 flex flex-col gap-4'>
+      <Card variant='surface' className='flex items-center justify-center w-1/3' >
+      <div className=' w-full flex flex-col gap-5'>
         <TextField.Root {...register('title')} placeholder='Enter Title' variant='soft' />
         <TextField.Root type='date'  {...register('start_time')} placeholder='Start Time' variant='soft' />
         <TextField.Root type='date'  {...register('end_time')} placeholder='End Time' variant='soft' />
         <TextField.Root {...register('status')} placeholder='Status' variant='soft' />
+      </div>
       </Card>
       <Button>Add Certificate</Button>
     </form>
