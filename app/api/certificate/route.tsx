@@ -25,7 +25,7 @@ export const POST=async(request:NextRequest)=>{
     return NextResponse.json({createCert},{status:201})
 }
 
-export const GET=async()=>{
+export const GET=async(request:NextRequest)=>{
     const [cert] = await prisma.certificate.findMany()
     return NextResponse.json(cert)
 }
