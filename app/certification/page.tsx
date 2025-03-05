@@ -30,7 +30,7 @@ const Certificate = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='gap-5 flex flex-col items-center justify-center h-screen'>
-      <Card variant='surface' className='flex items-center justify-center w-1/3' >
+      <Card variant='surface' className='flex items-center justify-center md:w-1/3 sm:w-full' >
       <div className=' w-full flex flex-col gap-5'>
         <TextField.Root {...register('title')} placeholder='Enter Title' variant='soft' />
         <TextField.Root type='date'  {...register('start_time')} placeholder='Start Time' variant='soft' />
