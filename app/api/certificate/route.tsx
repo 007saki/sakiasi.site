@@ -2,30 +2,63 @@ import { cerSchema } from "@/app/cerSchema";
 import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
+// Disable caching - helper function
+const noCacheHeaders:HeadersInit = {
+    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+    Pragma: 'no-cache',
+    Expires: '0',
+    'Surrogate-Control': 'no-store'
+};
 
+export const POST = async (request: NextRequest) => {
+    try {
+        const body = await request.json();
 
-export const POST=async(request:NextRequest)=>{
-    //deconstruct
-    const body = await request.json()
-
-    const validateCert = cerSchema.safeParse(body)
-    if(!validateCert.success)
-        return NextResponse.json('Invalid Certificate',{status:400})
-
-    //send to db
-    const createCert = await prisma.certificate.create({
-        data:{
-            title:body.title,
-            start_time: body.start_time,
-            end_time: body.end_time,
-            status: body.status
+        // Validate request body
+        const validateCert = cerSchema.safeParse(body);
+        if (!validateCert.success) {
+            return NextResponse.json(
+                { error: "Invalid Certificate" },
+                { status: 400, headers: noCacheHeaders }
+            );
         }
-    })
 
-    return NextResponse.json({createCert},{status:201})
-}
+        // Insert into database
+        const createCert = await prisma.certificate.create({
+            data: {
+                title: body.title,
+                start_time: body.start_time,
+                end_time: body.end_time,
+                status: body.status
+            }
+        });
 
-export const GET=async(request:NextRequest)=>{
-    const [cert] = await prisma.certificate.findMany()
-    return NextResponse.json(cert)
-}
+        return NextResponse.json(
+            { certificate: createCert },
+            { status: 201, headers: noCacheHeaders }
+        );
+    } catch (error) {
+        console.error("POST Error:", error);
+        return NextResponse.json(
+            { error: "Something went wrong" },
+            { status: 500, headers: noCacheHeaders }
+        );
+    }
+};
+
+export const GET = async () => {
+    try {
+        const certificates = await prisma.certificate.findMany();
+
+        return NextResponse.json(certificates, {
+            status: 200,
+            headers: noCacheHeaders
+        });
+    } catch (error) {
+        console.error("GET Error:", error);
+        return NextResponse.json(
+            { error: "Failed to fetch certificates" },
+            { status: 500, headers: noCacheHeaders }
+        );
+    }
+};
