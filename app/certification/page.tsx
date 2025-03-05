@@ -16,6 +16,7 @@ const Certificate = () => {
   )
 
   const onSubmit: SubmitHandler<myType> = async (data) => {
+    
     const formattedData = {
         ...data,
         start_time: new Date(data.start_time + 'T00:00:00.000Z').toISOString(),
@@ -30,7 +31,7 @@ const Certificate = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='gap-5 flex flex-col items-center justify-center h-screen'>
-      <Card className='p-4 w-1/4 grid gap-4'>
+      <Card className='p-4 w-3/4 flex flex-col gap-4'>
         <TextField.Root {...register('title')} placeholder='Enter Title' variant='soft' />
         <TextField.Root type='date'  {...register('start_time')} placeholder='Start Time' variant='soft' />
         <TextField.Root type='date'  {...register('end_time')} placeholder='End Time' variant='soft' />
