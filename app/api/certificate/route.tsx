@@ -1,17 +1,31 @@
-
-
-import { prisma } from "@/hello-prisma/prisma/prisma";
+import { cerSchema } from "@/app/cerSchema";
+import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async () => {
-    const user = await prisma.user.findMany()
-    if(!user) return NextResponse.json({},{status:400})
-    return NextResponse.json(user)
-}
+
 
 export const POST=async(request:NextRequest)=>{
-  const body = await request.json();
-  const {title} = await body
-  const cert = await prisma.certificate.create({data:{title:title}})
-  return NextResponse.json(cert,{status:201})
+    //deconstruct
+    const body = await request.json()
+
+    const validateCert = cerSchema.safeParse(body)
+    if(!validateCert.success)
+        return NextResponse.json('Invalid Certificate',{status:400})
+
+    //send to db
+    const createCert = await prisma.certificate.create({
+        data:{
+            title:body.title,
+            start_time: body.start_time,
+            end_time: body.end_time,
+            status: body.status
+        }
+    })
+
+    return NextResponse.json({createCert},{status:201})
+}
+
+export const GET=async()=>{
+    const [cert] = await prisma.certificate.findMany()
+    return NextResponse.json(cert)
 }

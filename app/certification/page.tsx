@@ -1,26 +1,46 @@
 
-
 'use client'
-import React, { ChangeEvent, useState, } from 'react'
-import axios from 'axios'
+import { Button, Card, TextField } from '@radix-ui/themes';
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from 'zod';
+import { cerSchema } from '../cerSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+
+export type myType = z.infer<typeof cerSchema>;
 
 const Certificate = () => {
-  const [title, setTitle] = useState('')
-  
-  const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
-    const value = e.target.value
-    setTitle(value)
-  }
-  
-  const handleSubmit=async()=>{
-    await axios.post('/api/certificate',title)
-  }
+
+  const {register,handleSubmit} = useForm<myType>(
+    {resolver:zodResolver(cerSchema)}
+  )
+
+  const onSubmit: SubmitHandler<myType> = async (data) => {
+    const formattedData = {
+        ...data,
+        start_time: new Date(data.start_time + 'T00:00:00.000Z').toISOString(),
+        end_time: new Date(data.end_time + 'T00:00:00.000Z').toISOString(),
+    };
+
+    console.log("Sending:", formattedData);  // See final data in console
+
+    await axios.post('/api/certificate', formattedData);
+};
+
+
   return (
-    <div>
-      <input className='border-solid border-black border rounded-b-lg' placeholder='Enter Title' onChange={handleChange} type="text" />
-      <button onClick={handleSubmit}>submit</button>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)} className='gap-5 flex flex-col items-center justify-center h-screen'>
+      <Card className='p-4 w-1/4 grid gap-4'>
+        <TextField.Root {...register('title')} placeholder='Enter Title' variant='soft' />
+        <TextField.Root type='date'  {...register('start_time')} placeholder='Start Time' variant='soft' />
+        <TextField.Root type='date'  {...register('end_time')} placeholder='End Time' variant='soft' />
+        <TextField.Root {...register('status')} placeholder='Status' variant='soft' />
+      </Card>
+      <Button>Add Certificate</Button>
+    </form>
   )
 }
+
+
 
 export default Certificate
