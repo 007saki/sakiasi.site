@@ -6,17 +6,17 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { IoMdArrowRoundForward } from 'react-icons/io'
 
-export const cerItems = [
-  {id: 1, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Learning-Data-Analytics-Foundations.jpg'},
-  {id: 2, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Data-Literacy-Exploring-an-Describing-Data.jpg'},
-  {id: 3, date:'2023-04-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Learning-Excel-Data-Analysis.jpg'},
-  {id: 4, date:'2023-05-04',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'NoSQL-Essential-Training.jpg'},
-  {id: 5, date:'2023-06-05',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Power-BI-Essential-Training.jpg'},
-  {id: 6, date:'2023-03-07',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'SQL-for-Data-Analysis.jpg'},
-  {id: 7, date:'2023-02-02',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'SQL-Server-Fundamentals-Master-Basic-Query-Techniques.jpg'},
-  {id: 8, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'The-Non-Technical-Skills-of-Effective-Data-Scientists.jpg'},
-]
 const CerTable = () => {
+  const cerItems = [
+    {id: 1, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Learning-Data-Analytics-Foundations.jpg'},
+    {id: 2, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Data-Literacy-Exploring-an-Describing-Data.jpg'},
+    {id: 3, date:'2023-04-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Learning-Excel-Data-Analysis.jpg'},
+    {id: 4, date:'2023-05-04',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'NoSQL-Essential-Training.jpg'},
+    {id: 5, date:'2023-06-05',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Power-BI-Essential-Training.jpg'},
+    {id: 6, date:'2023-03-07',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'SQL-for-Data-Analysis.jpg'},
+    {id: 7, date:'2023-02-02',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'SQL-Server-Fundamentals-Master-Basic-Query-Techniques.jpg'},
+    {id: 8, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'The-Non-Technical-Skills-of-Effective-Data-Scientists.jpg'},
+  ]
 
   const router = useRouter()
 
@@ -40,8 +40,8 @@ const CerTable = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body className='md:hidden'>
-          {cerItems.map((certificate,index)=>
-          <Table.Row  key={index}>
+          {cerItems.map((certificate)=>
+          <Table.Row  key={certificate.id}>
           <Table.Cell>
             <div className='flex gap-3 flex-col'>
               
@@ -62,8 +62,8 @@ const CerTable = () => {
           )}
         </Table.Body>
         <Table.Body >
-          {cerItems.map((certificate,index)=>
-              <Table.Row className='hover:cursor-pointer hover:bg-purple-200 hidden md:table-row' onClick={()=>redirect(certificate.id)} key={index}>
+          {cerItems.map((certificate)=>
+              <Table.Row className='hover:cursor-pointer hover:bg-purple-200 hidden md:table-row' onClick={()=>redirect(certificate.id)} key={certificate.id}>
                 <Table.Cell>{certificate.id}</Table.Cell>
                 <Table.Cell>{certificate.date}</Table.Cell>
                 <Table.Cell >{certificate.name.replaceAll(/-/g,' ').replaceAll('.jpg','')}</Table.Cell>
