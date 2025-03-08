@@ -1,9 +1,10 @@
 
 
 'use client'
-import { Table } from '@radix-ui/themes'
+import { Badge, Button, Table, Text } from '@radix-ui/themes'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { IoMdArrowRoundForward } from 'react-icons/io'
 
 const CerTable = () => {
 
@@ -29,16 +30,41 @@ const CerTable = () => {
       <Table.Root size={'1'} variant='surface'>
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeaderCell>ID</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Institution</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Type</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Category</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:block'>ID</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:block'>Date</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:block'>Name</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:block'>Institution</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:block'>Type</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='hidden md:block'>Category</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className='md:hidden'>Certificates</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
 
-        <Table.Body>
+        <Table.Body className='md:hidden'>
+          {cerItems.map((certificate,index)=>
+          <Table.Row  key={index}>
+          <Table.Cell>
+            <div className='flex gap-3 flex-col'>
+              
+              <div className='flex flex-col gap-2'>
+                <Text className='text-lg'>{certificate.name.replaceAll('-',' ').replaceAll('.jpg','')}</Text>
+                <div className='flex gap-3'>
+                <Text className='italic'>{certificate.date}</Text>
+                <Badge variant='soft'>{certificate.Category}</Badge>
+                </div>
+              </div>
+              <div>
+                <Button size={'1'} radius='medium' onClick={()=>redirect(certificate.id)} color='purple' variant='solid'>view Details <IoMdArrowRoundForward/></Button>
+              </div>
+              
+            </div>
+            </Table.Cell>
+        </Table.Row>
+          )}
+        </Table.Body>
+
+
+        <Table.Body className='hidden md:block'>
           {cerItems.map((certificate,index)=>
               <Table.Row className='hover:cursor-pointer hover:bg-purple-400' onClick={()=>redirect(certificate.id)} key={index}>
                 <Table.Cell>{certificate.id}</Table.Cell>

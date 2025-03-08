@@ -38,7 +38,7 @@ export default function RootLayout({
             <Navbar/>
           </div>
           <main className="h-screen overflow-y-auto flex flex-col flex-grow ">
-            <div className="md:hidden bg-blue-500 z-0">
+            <div className="md:hidden bg-purple-200">
               <Navbar/>
             </div>
               {children}
