@@ -29,13 +29,13 @@ const CerTable = () => {
     <div className='p-5'>
       <Table.Root size={'1'} variant='surface'>
         <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell className='hidden md:block'>ID</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:block'>Date</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:block'>Name</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:block'>Institution</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:block'>Type</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:block'>Category</Table.ColumnHeaderCell>
+          <Table.Row className='hidden md:table-row'>
+            <Table.ColumnHeaderCell>ID</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Institution</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Type</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Category</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell className='md:hidden'>Certificates</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
@@ -64,9 +64,9 @@ const CerTable = () => {
         </Table.Body>
 
 
-        <Table.Body className='hidden md:block'>
+        <Table.Body >
           {cerItems.map((certificate,index)=>
-              <Table.Row className='hover:cursor-pointer hover:bg-purple-400' onClick={()=>redirect(certificate.id)} key={index}>
+              <Table.Row className='hover:cursor-pointer hover:bg-purple-400 hidden md:table-row' onClick={()=>redirect(certificate.id)} key={index}>
                 <Table.Cell>{certificate.id}</Table.Cell>
                 <Table.Cell>{certificate.date}</Table.Cell>
                 <Table.Cell>{certificate.name}</Table.Cell>
