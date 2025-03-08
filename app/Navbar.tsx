@@ -1,8 +1,8 @@
 
 
 
-import { Button, DropdownMenu } from '@radix-ui/themes'
 import Link from 'next/link'
+import { Button, DropdownMenu } from '@radix-ui/themes'
 import { GrProjects } from 'react-icons/gr'
 import { IoIosMenu } from 'react-icons/io'
 import { IoHomeOutline } from 'react-icons/io5'
@@ -13,15 +13,16 @@ import { SlGraduation } from 'react-icons/sl'
 const Navbar = () => {
 
     const links = [
-        {label:'Home', href:'/',icon:<IoHomeOutline />},
-        {label:'Education', href:'/education', icon: <SlGraduation />},
-        {label:'Certification', href:'/certification', icon: <PiCertificate />},
-        {label:'Experience', href:'/experience', icon:<MdWorkOutline />},
-        {label:'Project', href:'/project', icon: <GrProjects />},
+        {label:'Home', href:'/',icon:<IoHomeOutline />}, 
+        {label:'Education', href:'/education', icon: <SlGraduation />}, 
+        {label:'Certification', href:'/certification', icon: <PiCertificate />}, 
+        {label:'Experience', href:'/experience', icon:<MdWorkOutline />}, 
+        {label:'Project', href:'/project', icon: <GrProjects />}, 
         {label:'Photo', href:'/photo', icon:<MdOutlineAddAPhoto />},
     ]
-
+  
     const DropdownComponent=()=>{
+
       return (
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>

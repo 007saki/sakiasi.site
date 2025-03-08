@@ -24,10 +24,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
+
     children,
   }: Readonly<{
     children: React.ReactNode;
   }>) {
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}>
@@ -36,7 +38,7 @@ export default function RootLayout({
             <Navbar/>
           </div>
           <main className="h-screen overflow-y-auto flex flex-col flex-grow ">
-            <div className="md:hidden">
+            <div className="md:hidden bg-blue-500 z-0">
               <Navbar/>
             </div>
               {children}
