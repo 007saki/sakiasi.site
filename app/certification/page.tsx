@@ -9,7 +9,7 @@ import { IoMdArrowRoundForward } from 'react-icons/io'
 const CerTable = () => {
   const cerItems = [
     {id: 1, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Learning-Data-Analytics-Foundations.jpg'},
-    {id: 2, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Data-Literacy-Exploring-an-Describing-Data.jpg'},
+    {id: 2, date:'2023-01-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Data-Literacy-Exploring-and-Describing-Data.jpg'},
     {id: 3, date:'2023-04-01',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Learning-Excel-Data-Analysis.jpg'},
     {id: 4, date:'2023-05-04',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'NoSQL-Essential-Training.jpg'},
     {id: 5, date:'2023-06-05',institution:'LinkedIn', QualificationType:'Certificate', Category:'Specialized', status:'COMPLETE', name:'Power-BI-Essential-Training.jpg'},
@@ -32,7 +32,7 @@ const CerTable = () => {
           <Table.Row className='hidden md:table-row'>
             <Table.ColumnHeaderCell>ID</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Certificates</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Institution</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Type</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>

@@ -1,12 +1,12 @@
 
 
 
-import Link from 'next/link'
 import { Button, DropdownMenu } from '@radix-ui/themes'
-import { GrProjects } from 'react-icons/gr'
-import { IoIosMenu } from 'react-icons/io'
-import { IoHomeOutline } from 'react-icons/io5'
-import { MdOutlineAddAPhoto, MdWorkOutline } from 'react-icons/md'
+import Link from 'next/link'
+import { GrBlog, GrProjects } from 'react-icons/gr'
+import { IoIosInformationCircleOutline, IoIosMenu } from 'react-icons/io'
+import { IoDocumentOutline, IoHomeOutline } from 'react-icons/io5'
+import { MdOutlineAddAPhoto, MdOutlinePrivacyTip, MdWorkOutline } from 'react-icons/md'
 import { PiCertificate } from 'react-icons/pi'
 import { SlGraduation } from 'react-icons/sl'
 
@@ -19,6 +19,10 @@ const Navbar = () => {
         {label:'Experience', href:'/experience', icon:<MdWorkOutline />}, 
         {label:'Project', href:'/project', icon: <GrProjects />}, 
         {label:'Photo', href:'/photo', icon:<MdOutlineAddAPhoto />},
+        {label:'CV', href:'/cv', icon:<IoDocumentOutline/>},
+        {label:'Blog', href:'/blog', icon:<GrBlog />},
+        {label:'Privacy Policy', href:'/privacy-policy', icon:<MdOutlinePrivacyTip/>},
+        {label:'About', href:'/about', icon:<IoIosInformationCircleOutline />},
     ]
   
     const DropdownComponent=()=>{
