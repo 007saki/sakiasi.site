@@ -29,7 +29,8 @@ export const POST = async (request: NextRequest) => {
                 title: body.title,
                 start_time: body.start_time,
                 end_time: body.end_time,
-                status: body.status
+                status: body.status,
+                imageUrl: body.imageUrl
             }
         });
 
@@ -44,7 +45,7 @@ export const POST = async (request: NextRequest) => {
             { status: 500, headers: noCacheHeaders }
         );
     }
-};
+}
 
 export const GET = async () => {
     try {
@@ -59,6 +60,6 @@ export const GET = async () => {
         return NextResponse.json(
             { error: "Failed to fetch certificates" },
             { status: 500, headers: noCacheHeaders }
-        );
+        )
     }
-};
+}
