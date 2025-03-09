@@ -10,11 +10,26 @@ datasource db {
 
 model Certificate {
   id         Int      @id @default(autoincrement())
-  title      String
-  start_time DateTime @default(now())
-  end_time   DateTime @default(now())
-  status     Status  @default(COMPLETE)
-  imageUrl   String?
+  date      DateTime @default(now())
+  institution String?
+  qualificationType String?
+  category Category @default(WEB_DEVELOPMENT)
+  status Status @default(COMPLETE)
+  certificate_desc String?
+  name String?
+}
+
+enum Category {
+  WEB_DEVELOPMENT
+  CYBER_SECURITY
+  NETWORKING
+  DATABASE
+  MOBILE_DEVELOPMENT
+  MACHINE_LEARNING
+  JAVASCRIPT
+  PYTHON
+  AI
+  UI_UX_DESIGN
 }
 
 model Post {
@@ -37,3 +52,4 @@ enum Status {
   COMPLETE
   IN_PROGRESS
 }
+
