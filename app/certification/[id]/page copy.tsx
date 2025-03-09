@@ -26,8 +26,8 @@ const CertificateDetailsPage = async({params}:{params:Promise<{id:string}>}) => 
             </div>
           </div>
           </div>
-          <div className='sm:border-t md:border-l flex flex-col'>
-            <div className=' md:border-none md:p-0 mt-3'>
+          <div className='md:border-l px-5 flex flex-col'>
+            <div className='sm:border-t md:border-none md:p-0 p-5'>
               {cert!.certificate_desc}
             </div>
           </div>

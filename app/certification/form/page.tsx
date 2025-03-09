@@ -3,6 +3,7 @@
 'use client'
 import { certificateSchema } from '@/app/cerSchema'
 import { Button, Select, TextArea, TextField, Tooltip } from '@radix-ui/themes'
+import axios from 'axios'
 import {Controller, useForm} from 'react-hook-form'
 import { z } from 'zod'
 
@@ -12,8 +13,13 @@ const CertificateForm = () => {
 
     const {register, handleSubmit, control} = useForm<certType>()
 
-    const onSubmit=(data:certType)=>{
-        console.log(data)
+    const onSubmit=async(data:certType)=>{
+        const formatData = {
+            ...data,
+            date: data.date ? new Date(data.date).toISOString() : undefined,
+        }
+        console.log(formatData)
+        await axios.post('/api/certificate',formatData)
     }
 
   return (
