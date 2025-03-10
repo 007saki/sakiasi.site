@@ -12,7 +12,7 @@ const CertificateDetailsPage = async({params}:{params:Promise<{id:string}>}) => 
     <div className='p-4'>
         <div className=' items-center flex flex-col gap-5' key={cert!.id}>
           <div className='flex items-center flex-col'>
-            <img width={400} height={400} src={`/${cert!.name}`} alt={`${cert!.name}`} />
+            <img width={400} height={400} src={`/certificates/${cert!.name}`} alt={`${cert!.name}`} />
             <div>
               <div className='flex items-center flex-col'>
                 <div className='flex gap-4 items-center p-2'>

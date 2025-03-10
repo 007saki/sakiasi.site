@@ -29,7 +29,6 @@ const CerTable = () => {
     router.push(`/certification/${id}`)
   }
 
-
   return (
     <div className='p-5'>
       <Table.Root size={'1'} variant='ghost'>
@@ -51,7 +50,7 @@ const CerTable = () => {
             <div className='flex gap-3 flex-col'>
               
               <div className='flex flex-col gap-2'>
-                <Text className='text-lg'>{certificate.name!.replaceAll('-',' ').replaceAll('.jpg','')}</Text>
+                <Text className='text-lg'>{certificate.name}</Text>
                 <div className='flex gap-3'>
                 <Text className='italic'>{new Date(certificate.date).toLocaleDateString()}</Text>
                 <Badge color='green' variant='soft'>{certificate.status}</Badge>
