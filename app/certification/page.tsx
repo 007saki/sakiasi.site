@@ -4,10 +4,10 @@
 import { Badge, Button, Table, Text } from '@radix-ui/themes'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoMdArrowRoundForward } from 'react-icons/io'
-import { certificateSchema } from '../cerSchema'
 import { z } from 'zod'
+import { certificateSchema } from '../cerSchema'
 
 export type certType = z.infer<typeof certificateSchema>
 
