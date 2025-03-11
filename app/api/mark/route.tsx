@@ -6,7 +6,7 @@ export const POST=async(request:NextRequest)=>{
     const file = formData.get("file") as File;
 
     if(!file){
-        return NextResponse.json({message:'no file reached server'})
+        return NextResponse.json({message:'no file reached server try again'})
     }
 
     return NextResponse.json({message:'Received from backend'},{statusText:`${file?`${file.name}`:'no file reached server'}`})
