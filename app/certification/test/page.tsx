@@ -1,40 +1,45 @@
 
-
 'use client'
-import { Button } from '@radix-ui/themes'
-import axios from 'axios'
-import React, { useState } from 'react'
+// pages/index.tsx
+import { useState } from 'react';
+import axios from 'axios';
 
-const FileUpload = () => {
-    const [file, setFile] = useState<File|null>(null)
+const Home = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
-    const handleFile=(e:React.ChangeEvent<HTMLInputElement>)=>{
-        const file = e.target.files?.[0]
-        if(!file) {return;}
-        else{
-            setFile(file)
-        }
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
     }
+  };
 
-    const handleSubmit=async()=>{      
-        if(file){
-            const fileData = new FormData()
-            fileData.append('file',file)
-            console.log(fileData)
+  const handleUpload = async () => {
+    if (!file) return;
 
-            const res = await axios.post('/api/file', fileData )
-            const response = res.data
-            console.log(response)
-        }
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+        const formData = new FormData();
+        formData.append('file', file);
+        console.log(formData)
+        const response = await axios.post('/api/mark', formData);
+        const data = response.data
+        console.log(data)
+    } catch {
+      setMessage('Error uploading file.');
     }
-
+  };
 
   return (
     <div>
-        <input type="file" onChange={handleFile} />
-        <Button onClick={handleSubmit}>Submit</Button>
+      <h1>File Upload</h1>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload</button>
+      {message && <p>{message}</p>}
     </div>
-  )
-}
+  );
+};
 
-export default FileUpload
+export default Home;
