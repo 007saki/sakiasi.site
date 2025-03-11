@@ -73,26 +73,27 @@ const CertificateForm = ({id}:{id:number}) => {
             date: new Date(data.date).toISOString(),
         };
 
-        const formData = new FormData();
-        formData.append('file', file!);
-        await axios.post('/api/upload', formData);
+        if(file){
+            const formData = new FormData();
+            formData.append('file', file!);
+            await axios.post('/api/upload', formData);
+        }
         
+
         try {
             if(cert){
                 try {
-                const validation = certificateSchema.safeParse(formattedDataWithFile)
+                const validation = certificateSchema.safeParse(file&&formattedDataWithFile || formattedData)
                 if(!validation.success){
                     console.log(validation.error.errors)
                     return
                 }
-                
-                await axios.patch(`/api/certificate/${cert.id}`, file?formattedDataWithFile:formattedData);
+                await axios.patch(`/api/certificate/${cert.id}`, file&&formattedDataWithFile || formattedData);
                 setMessage('Qualification updated successfully!');
                 } catch (error) {
                 setMessage(`Failed to update: ${error}`)
                 }
             } else {
-                
                 await axios.post('/api/certificate', file&&formattedDataWithFile || formattedData);
                 setMessage('Qualification created successfully!');
             }
