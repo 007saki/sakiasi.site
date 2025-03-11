@@ -8,13 +8,13 @@ import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { IoInformationCircle } from 'react-icons/io5';
+import { certType } from '../../page';
 import { Certificate } from '@prisma/client';
 import { certificateSchema } from '@/app/cerSchema';
-import { certType } from '../page';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
 
-const CertificateForm = ({id}:{id:number}) => {
+const CertificateUpdateForm = ({ params }: { params: Promise<{ id: string }> }) => {
 
     const [cert, setCert] = useState<Certificate | null>(null);
     const [file, setFile] = useState<File | null>(null);
@@ -26,7 +26,7 @@ const CertificateForm = ({id}:{id:number}) => {
 
     useEffect(() => {
       const getCert = async () => {
-          const response = await axios.get(`/api/certificate/${id}`);
+          const response = await axios.get(`/api/certificate/${(await params).id}`);
           const data = response.data;
           if (data) {
             data.date = new Date(data.date).toISOString().split('T')[0];
@@ -35,20 +35,17 @@ const CertificateForm = ({id}:{id:number}) => {
           reset(data);  // Reset form with fetched data
 
       };
-      if(id){
-          getCert();
-      }
-  }, [id, reset]);
+      getCert();
+  }, [params, reset]);
   
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const selectedFile = e.target.files?.[0] || null;
-            if (!selectedFile) {
-                setFileMessage('Please choose a file first');
-            } else {
-                setFile(selectedFile);
-                setFileMessage(null); // Clear message if file is selected
-                console.log(selectedFile.name)
-            }
+        const selectedFile = e.target.files?.[0] || null;
+        if (!selectedFile) {
+            setFileMessage('Please choose a file first');
+        } else {
+            setFile(selectedFile);
+            setFileMessage(null); // Clear message if file is selected
+        }
     };
 
     const handleStatus = () => {
@@ -62,38 +59,31 @@ const CertificateForm = ({id}:{id:number}) => {
             return;
         }
 
-        const formattedDataWithFile = {
+        
+        const formattedData = {
             ...data,
             date: new Date(data.date).toISOString(),
             name: file?.name,
         };
 
-        const formattedData = {
-            ...data,
-            date: new Date(data.date).toISOString(),
-        };
-
-        const formData = new FormData();
-        formData.append('file', file!);
-        await axios.post('/api/upload', formData);
-        
         try {
             if(cert){
                 try {
-                const validation = certificateSchema.safeParse(formattedDataWithFile)
+                const validation = certificateSchema.safeParse(formattedData)
                 if(!validation.success){
                     console.log(validation.error.errors)
                     return
                 }
-                
-                await axios.patch(`/api/certificate/${cert.id}`, file?formattedDataWithFile:formattedData);
+                await axios.patch(`/api/certificate/${cert.id}`, formattedData);
                 setMessage('Qualification updated successfully!');
                 } catch (error) {
                 setMessage(`Failed to update: ${error}`)
                 }
             } else {
-                
-                await axios.post('/api/certificate', file&&formattedDataWithFile || formattedData);
+                const formData = new FormData();
+                formData.append('file', file!);
+                await axios.post('/api/certificate', formattedData);
+                await axios.post('/api/upload', formData);
                 setMessage('Qualification created successfully!');
             }
 
@@ -187,15 +177,12 @@ const CertificateForm = ({id}:{id:number}) => {
                     name='certificate_desc'
                     render={({ field }) => <SimpleMDE value={field.value} onChange={field.onChange} placeholder='Enter Qualification Description' />}
                 />
-                {cert&&<TextField.Root disabled {...register('name')} value={cert?.name}/>}
                 <input onChange={handleFileChange} type="file" />
                 {fileMessage && <Text>{fileMessage}</Text>}
             </div>
-            {cert?
-            <Button type='submit' size={'3'} variant='soft' color='purple'>Update</Button>:
-            <Button type='submit' size={'3'} variant='soft' color='purple'>Submit</Button>}
+            <Button type='submit' size={'3'} variant='soft' color='purple'>Submit</Button>
         </form>
     );
 }
 
-export default CertificateForm;
+export default CertificateUpdateForm;

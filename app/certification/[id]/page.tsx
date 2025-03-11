@@ -6,13 +6,11 @@ import Image from 'next/image'
 import { FaCertificate } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
 
-
 const CertificateDetailsPage = async({params}:{params:Promise<{id:string}>}) => {
   const id = (await params).id
   const cert = await prisma.certificate.findUnique({
      where:{id:(parseInt(id))},
   })
-
 
   return (
     <div className='p-4'>
