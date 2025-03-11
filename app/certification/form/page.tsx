@@ -79,7 +79,7 @@ const CertificateForm = ({id}:{id:number}) => {
             const formData = new FormData();
             formData.append('file', file);
             console.log(formData)
-            const response = await axios.post('/api/upload', formData);
+            const response = await axios.post('/api/file', formData);
             const data = response.data
             console.log(data)
         }
