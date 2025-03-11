@@ -79,7 +79,6 @@ const CertificateForm = ({id}:{id:number}) => {
             await axios.post('/api/upload', formData);
         }
         
-
         try {
             if(cert){
                 try {
