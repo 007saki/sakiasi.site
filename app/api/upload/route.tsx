@@ -1,8 +1,10 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import fs from 'fs';
 
 export const POST = async (request: NextRequest) => {
+    
     try {
         // Parse the form data
         const formData = await request.formData();
@@ -32,4 +34,5 @@ export const POST = async (request: NextRequest) => {
     } catch (error) {
         return NextResponse.json({ message: `Upload file failed: ${error}` }, { status: 500 });
     }
+
 };

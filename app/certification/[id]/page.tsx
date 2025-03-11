@@ -1,18 +1,29 @@
 
 
-import { Badge, Text } from '@radix-ui/themes'
-import { FaCertificate } from 'react-icons/fa'
 import { prisma } from '@/prisma/client'
+import { Badge, Text } from '@radix-ui/themes'
+import Image from 'next/image'
+import { FaCertificate } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
+
 
 const CertificateDetailsPage = async({params}:{params:Promise<{id:string}>}) => {
   const id = (await params).id
-  const cert = await prisma.certificate.findUnique({where:{id:(parseInt(id))}})
+  const cert = await prisma.certificate.findUnique({
+     where:{id:(parseInt(id))},
+  })
+
+
   return (
     <div className='p-4'>
         <div className=' items-center flex flex-col gap-5' key={cert!.id}>
           <div className='flex items-center flex-col'>
-            <img width={400} height={400} src={`/certificates/${cert!.name}`} alt={`${cert!.name}`} />
+            <Image
+              width={400}
+              height={400}
+              src={`/certificates/${cert!.name}`}
+              alt={`${cert!.name}`}
+            />
             <div>
               <div className='flex items-center flex-col'>
                 <div className='flex gap-4 items-center p-2'>
