@@ -1,6 +1,6 @@
 
 
-
+'use client'
 import { Button, DropdownMenu } from '@radix-ui/themes'
 import Link from 'next/link'
 import { GrBlog, GrProjects } from 'react-icons/gr'
