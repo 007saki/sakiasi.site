@@ -26,7 +26,9 @@ const Home = () => {
         console.log(formData)
         const response = await axios.post('/api/mark', formData);
         const data = response.data
+        const test = response.statusText
         console.log(data)
+        console.log(test)
     } catch {
       setMessage('Error uploading file.');
     }
