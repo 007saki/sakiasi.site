@@ -75,7 +75,7 @@ const CertificateForm = ({id}:{id:number}) => {
 
         if(file){
             const formData = new FormData();
-            formData.append('file', file!);
+            formData.append('file', file);
             await axios.post('/api/upload', formData);
         }
         
@@ -134,6 +134,7 @@ const CertificateForm = ({id}:{id:number}) => {
                                 <Select.Content variant='soft' color='purple'>
                                     <Select.Item value='select'>Select Qualification Type</Select.Item>
                                     <Select.Item value='certificate'>Primary Education Certificate</Select.Item>
+                                    <Select.Item value='professional development certificate'>Professional Development Certificate</Select.Item>
                                     <Select.Item value='Secondary Education Certificate'>Secondary Education Certificate</Select.Item>
                                     <Select.Item value='Associate Degree'>Associate Degree (e.g., Associate of Arts - AA, Associate of Science - AS)</Select.Item>
                                     <Select.Item value='Bachelor’s Degree'>Bachelor’s Degree (e.g., BA, BSc, BEng, LLB)</Select.Item>
