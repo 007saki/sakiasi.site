@@ -16,7 +16,7 @@ const CerTable = () => {
 
   useEffect(()=>{
     const getCertificate=async()=>{
-      const cert = await axios.get('/api/certificate')
+      const cert = await axios.get('/api/qualification')
       const data = await cert.data
       setCertificates(data)
     }
@@ -26,7 +26,7 @@ const CerTable = () => {
   const router = useRouter()
 
   const redirect=(id:number)=>{
-    router.push(`/certification/${id}`)
+    router.push(`/qualification/${id}`)
   }
 
   return (
@@ -53,13 +53,12 @@ const CerTable = () => {
                 <Text className='text-lg'>{certificate.name}</Text>
                 <div className='flex gap-3'>
                 <Text className='italic'>{new Date(certificate.date).toLocaleDateString()}</Text>
-                <Badge color='green' variant='soft'>{certificate.status}</Badge>
+                <Badge color={certificate.status==='Complete'?'green':'orange'} variant='soft'>{certificate.status}</Badge>
                 </div>
               </div>
               <div>
                 <Button size={'1'} radius='medium' onClick={()=>redirect(certificate.id!)} color='purple' variant='solid'>view Details <IoMdArrowRoundForward/></Button>
               </div>
-              
             </div>
             </Table.Cell>
         </Table.Row>
@@ -73,7 +72,7 @@ const CerTable = () => {
                 <Table.Cell >{certificate.name!.replaceAll(/-/g,' ').replaceAll('.jpg','')}</Table.Cell>
                 <Table.Cell>{certificate.institution}</Table.Cell>
                 <Table.Cell>{certificate.qualificationType}</Table.Cell>
-                <Table.Cell><Badge variant='soft' color='green'>{certificate.status}</Badge></Table.Cell>
+                <Table.Cell><Badge variant='soft' color={certificate.status==='Complete'?'green':'orange'} >{certificate.status}</Badge></Table.Cell>
               </Table.Row>
           )}
         </Table.Body>

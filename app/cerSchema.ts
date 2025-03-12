@@ -9,4 +9,5 @@ export const certificateSchema = z.object({
   status: z.string().min(1, "Status is required"), // Assuming stored as a string
   certificate_desc: z.string().min(1, "Certificate description is required"), 
   name: z.string().min(1, "Name is required"), 
+  certificate_id: z.string().nullable().optional()
 });

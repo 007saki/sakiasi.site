@@ -50,6 +50,7 @@ export const PATCH = async (request: NextRequest, { params }: { params: Promise<
                 name: body.name,
                 qualificationType: body.qualificationType,
                 status: body.status,
+                certificate_id: body.certificate_id,
             },
         });
 

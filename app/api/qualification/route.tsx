@@ -10,6 +10,7 @@ export const GET=async()=>{
 
 export const POST=async(request:NextRequest)=>{
     const body = await request.json()
+    
     const validation = certificateSchema.safeParse(body)
     if(!validation.success)
         return NextResponse.json(validation.error.errors,{status:400})
@@ -24,6 +25,7 @@ export const POST=async(request:NextRequest)=>{
                 status: body.status,
                 certificate_desc: body.certificate_desc,
                 name: body.name,
+                certificate_id: body.certificate_id,
             }
         })
         return NextResponse.json(createCert,{status:201})

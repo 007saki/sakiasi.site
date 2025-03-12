@@ -19,7 +19,7 @@ const CertificateDetailsPage = async({params}:{params:Promise<{id:string}>}) => 
             <Image
               width={400}
               height={400}
-              src={`/certificates/${cert!.name}`}
+              src={`https://drive.google.com/uc?id=${cert?.certificate_id}`}
               alt={`${cert!.name}`}
             />
             <div>

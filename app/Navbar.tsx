@@ -15,7 +15,7 @@ const Navbar = () => {
     const links = [
         {label:'Home', href:'/',icon:<IoHomeOutline />}, 
         {label:'Education', href:'/education', icon: <SlGraduation />}, 
-        {label:'Certification', href:'/certification', icon: <PiCertificate />}, 
+        {label:'Qualification', href:'/qualification', icon: <PiCertificate />}, 
         {label:'Experience', href:'/experience', icon:<MdWorkOutline />}, 
         {label:'Project', href:'/project', icon: <GrProjects />}, 
         {label:'Photo', href:'/photo', icon:<MdOutlineAddAPhoto />},
