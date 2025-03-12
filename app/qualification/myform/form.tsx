@@ -78,7 +78,7 @@ const Form= ({cert}:{cert?:Certificate}) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='p-2 flex items-center justify-center'>
         <div className='space-y-3 w-full p-2 md:w-2/5 flex flex-col '>
-            {/* <TextField.Root {...register('date')} color='purple' type='date' variant='soft' size={'3'} /> */}
+            <TextField.Root {...register('date')} color='purple' type='date' variant='soft' size={'3'} />
             {errors.date&&<Text>{errors.date?.message}</Text>}
 
             <TextField.Root {...register('institution')} color='purple' placeholder='Enter Institution' type='text' variant='soft' size={'3'} />
