@@ -55,19 +55,23 @@ const Form= ({cert}:{cert?:Certificate}) => {
         try {
             const validation = certificateSchema.safeParse(formattedData)
             if(!validation.success){
-                console.log(validation.error.errors)
-            }
-            if(!cert){
-                const res = await axios.post('/api/qualification',formattedData)
-                console.log(res.data)
-                console.log(res.statusText)
-                console.log('success')
+                // console.log(validation.error.errors)
+                alert(`Please fill missing fields`)
+                return
             } else{
-                const res = await axios.patch(`/api/qualification/${cert.id}`,formattedData)
-                console.log(res.data)
-                console.log(res.statusText)
-                console.log('success')
 
+                if(!cert){
+                    const res = await axios.post('/api/qualification',formattedData)
+                    console.log(res.data)
+                    console.log(res.statusText)
+                    console.log('success')
+                } else{
+                    const res = await axios.patch(`/api/qualification/${cert.id}`,formattedData)
+                    console.log(res.data)
+                    console.log(res.statusText)
+                    console.log('success')
+    
+                }
             }
 
         } catch (error) {
