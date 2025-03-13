@@ -82,4 +82,6 @@ const CerTable = () => {
   )
 }
 
+export const dynamic = 'force-dynamic'
+
 export default CerTable
