@@ -25,15 +25,15 @@ const CertificateDetailsPage = async({params}:{params:Promise<{id:string}>}) => 
             <div>
               <div className='flex items-center flex-col'>
                 <div className='flex gap-4 items-center p-2'>
-                  <Text className='font-serif flex items-center gap-1'> <FaCertificate color='purple'/> Certificate</Text>
+                  <Text className='font-serif flex items-center gap-1'> <FaCertificate color='purple'/> {cert?.name}</Text>
                 <div className='border-l px-3 flex items-center gap-2'>
                   <Badge variant='soft' color='green'>{cert!.status}</Badge>
                 </div>
               </div>
             </div>
           </div>
-                <div>
-                  <Text className='italic'>{new Date(cert!.date).toString()}</Text>
+                <div className='flex items-center justify-center'>
+                  <Text className='italic'>{new Date(cert!.date).toDateString()}</Text>
                 </div>
           </div>
           <div className=' prose border-t p-2 py-5'>

@@ -43,12 +43,12 @@ const CerTable = () => {
             <Table.ColumnHeaderCell className='md:hidden'>Certificates</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
+
         <Table.Body className='md:hidden'>
           {certificates.map((certificate)=>
           <Table.Row  key={certificate.id}>
           <Table.Cell>
             <div className='flex gap-3 flex-col'>
-              
               <div className='flex flex-col gap-2'>
                 <Text className='text-lg'>{certificate.name}</Text>
                 <div className='flex gap-3'>
@@ -64,6 +64,7 @@ const CerTable = () => {
         </Table.Row>
           )}
         </Table.Body>
+
         <Table.Body >
           {certificates.map((certificate)=>
               <Table.Row className='hover:cursor-pointer hover:bg-purple-200 hidden md:table-row' onClick={()=>redirect(certificate.id!)} key={certificate.id}>
