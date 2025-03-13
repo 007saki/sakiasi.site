@@ -34,7 +34,7 @@ export const PATCH=async(request:NextRequest, {params}:{params:Promise<{id:strin
 }
 
 
-export const DELETE=async({params}:{params:Promise<{id:string}>})=>{
+export const DELETE=async(request:NextRequest,{params}:{params:Promise<{id:string}>})=>{
     try {
         const id = (await params).id
         const deleteExperience = await prisma.experience.delete({where:{id:(parseInt(id))}})
