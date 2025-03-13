@@ -1,10 +1,13 @@
 
 
 import React from 'react'
+import PdfViewer from './pdfViewer'
 
 const CurriculumVitae = () => {
   return (
-    <div>CurriculumVitae</div>
+    <div>
+      <PdfViewer/>
+    </div>
   )
 }
 
