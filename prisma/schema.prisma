@@ -19,6 +19,15 @@ model Certificate {
   certificate_id    String?
 }
 
+model Experience {
+  id          Int      @id @default(autoincrement())
+  position    String
+  company     String
+  startDate   DateTime
+  endDate     DateTime?
+  description String?
+}
+
 model Post {
   id        Int     @id @default(autoincrement())
   title     String

@@ -1,4 +1,4 @@
-import { certificateSchema } from "@/app/cerSchema";
+import { certificateSchema } from "@/app/schema/cerSchema";
 import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 

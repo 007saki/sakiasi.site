@@ -1,7 +1,7 @@
 
 
 'use client'
-import { certificateSchema } from '@/app/cerSchema'
+import { certificateSchema } from '@/app/schema/cerSchema'
 import { Button, Checkbox, Flex, Select, Text, TextField } from '@radix-ui/themes'
 import axios from 'axios'
 import React, {  useEffect, useState } from 'react'
