@@ -9,23 +9,26 @@ datasource db {
 
 model Certificate {
   id                Int      @id @default(autoincrement())
+  certificate_desc  String
   date              DateTime
   institution       String
-  qualificationType String
-  category          String
-  status            String
-  certificate_desc  String
   name              String
+  qualificationType String
+  status            String
+  category          String
   certificate_id    String?
+  test String?
 }
 
 model Experience {
-  id          Int      @id @default(autoincrement())
-  position    String
-  company     String
-  startDate   DateTime
-  endDate     DateTime?
-  description String?
+  id            Int       @id @default(autoincrement())
+  position      String
+  company       String
+  startDate     DateTime
+  endDate       DateTime?
+  description   String?
+  employer_logo String?
+  images        String?
 }
 
 model Post {
