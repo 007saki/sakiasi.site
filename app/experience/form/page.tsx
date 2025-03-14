@@ -11,17 +11,30 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { useState } from 'react';
 import ErrorMessage from '@/app/components/errorMessage';
+import { Experience } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 
 const SimpleMDE = dynamic(()=>import ('react-simplemde-editor'),{ssr:false})
 
 
-const ExpForm = () => {
+const ExperienceForm = ({experience}:{experience?:Experience}) => {
+    const router = useRouter()
 
     const [message, setMessage] = useState('')
 
     const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType>({
         resolver: zodResolver(experienceSchema),
-        mode: 'onChange'
+        mode: 'onChange',
+        defaultValues:{
+            company: experience?.company,
+            description: experience?.description || '',
+            employer_logo: experience?.employer_logo || '',
+            startDate: experience?.startDate.toISOString().split('T')[0],
+            endDate: experience?.endDate?experience?.endDate?.toISOString().split('T')[0] : '',
+            images: experience?.images || '',
+            position: experience?.position || '',
+
+        }
     })
 
     const onSubmit=async(data:experienceType)=>{
@@ -36,6 +49,8 @@ const ExpForm = () => {
             
             axios.post('/api/experience/',formattedData)
             setMessage('Experience was created successfully')
+            router.push('/experience')
+
         } catch{
             setMessage('Failed to create experience')
         }
@@ -63,10 +78,10 @@ const ExpForm = () => {
             />
             {errors.description?.message && <Text color='red'>{errors.description?.message}</Text> }
 
-            <TextField.Root size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
+            <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
             {errors.employer_logo?.message && <Text color='red'>{errors.employer_logo?.message}</Text> }
 
-            <TextField.Root size='3' type='text' variant='soft' placeholder='Enter Image ID'/>
+            <TextField.Root {...register('images')} size='3' type='text' variant='soft' placeholder='Enter Image ID'/>
             {errors.images?.message && <Text color='red'>{errors.images?.message}</Text> }
 
             <Button type='submit'>Submit</Button>
@@ -75,4 +90,4 @@ const ExpForm = () => {
   )
 }
 
-export default ExpForm
+export default ExperienceForm
