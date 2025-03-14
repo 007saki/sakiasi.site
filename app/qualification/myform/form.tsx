@@ -51,6 +51,7 @@ const Form= ({cert}:{cert?:Certificate}) => {
             date: new Date(data.date).toISOString(),
             status: status,
         }
+        
         console.log(formattedData)
         try {
             const validation = certificateSchema.safeParse(formattedData)

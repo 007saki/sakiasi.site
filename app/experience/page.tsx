@@ -2,8 +2,8 @@
 
 
 import { prisma } from '@/prisma/client'
-import { Avatar, Box, Card, Flex, Text } from '@radix-ui/themes'
-import React from 'react'
+import { Box, Card, Flex, Text } from '@radix-ui/themes'
+import Image from 'next/image'
 
 const ExperiencePage = async() => {
   const experiences = await prisma.experience.findMany()
@@ -14,21 +14,23 @@ const ExperiencePage = async() => {
           <Box key={exp.id} maxWidth="240px">
           <Card>
             <Flex gap="3" align="center">
-              <Avatar
-                size="3"
-                src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
-                radius="full"
-                fallback="T"
-              />
+              <Image priority
+                  width={40}
+                  height={40}
+                  style={{ width: "auto", height: "auto" }} 
+                  src={`https://drive.google.com/uc?id=${exp.employer_logo}`}
+                  alt={`${exp.company}`}
+                />
               <Box>
                 <Text as="div" size="2" weight="bold">
-                  Teodros Girmay
+                  {exp.company}
                 </Text>
                 <Text as="div" size="2" color="gray">
-                  Engineering
+                  {exp.position}
                 </Text>
               </Box>
             </Flex>
+
           </Card>
         </Box>
         )}
