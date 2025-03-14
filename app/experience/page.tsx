@@ -19,7 +19,7 @@ const ExperiencePage = async() => {
                             height={50}
                             width={50}
                             alt='Logo'
-                            src={`https://drive.google.com/uc?id=${experience.employer_logo}`}
+                            src={`https://drive.google.com/uc?id=${experience?.employer_logo}`}
                             // fallback={experience.company}
                         />
                         <Box>
