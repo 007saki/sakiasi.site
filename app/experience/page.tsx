@@ -13,7 +13,7 @@ const ExperiencePage = async() => {
     <div className='flex flex-col gap-3 items-center py-5'>
         {experiences.map(experience=>
             <Box key={experience.id} className='w-3/5'>
-                <Card className='flex justify-around'>
+                <Card className='flex flex-col justify-center'>
                     <Flex gap="3" align="center" className='flex justify-center'>
                         <Image
                             height={50}
@@ -32,7 +32,7 @@ const ExperiencePage = async() => {
                         </Box>
                     </Flex>
 
-                    <div className='flex justify-around items-center gap-3'>
+                    <div className='flex flex-col items-center gap-3'>
                         <Text as="div" size="2" color="gray">From: {experience.startDate.toDateString()}</Text>
                         <Text as="div" size="2" color="gray">To: {experience.endDate?.toDateString()}</Text>
                     </div>
