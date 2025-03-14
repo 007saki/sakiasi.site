@@ -1,23 +1,25 @@
 
 
 
+
+
+
 'use client'
-import { experienceSchema, experienceType } from '@/app/schema/experienceSchema';
-import { Box, Button, Text, TextField } from '@radix-ui/themes'
-import "easymde/dist/easymde.min.css";
-import dynamic from 'next/dynamic'
-import {Controller, useForm} from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
-import { useState } from 'react';
 import ErrorMessage from '@/app/components/errorMessage';
+import { experienceSchema, experienceType } from '@/app/schema/experienceSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Experience } from '@prisma/client';
+import { Box, Button, Text, TextField } from '@radix-ui/themes';
+import axios from 'axios';
+import "easymde/dist/easymde.min.css";
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 const SimpleMDE = dynamic(()=>import ('react-simplemde-editor'),{ssr:false})
 
-
-const ExperienceForm = ({experience}:{experience?:Experience}) => {
+const FormExperience = ({experience}:{experience?:Experience}) => {
     const router = useRouter()
 
     const [message, setMessage] = useState('')
@@ -50,7 +52,6 @@ const ExperienceForm = ({experience}:{experience?:Experience}) => {
             axios.post('/api/experience/',formattedData)
             setMessage('Experience was created successfully')
             router.push('/experience')
-
         } catch{
             setMessage('Failed to create experience')
         }
@@ -59,9 +60,8 @@ const ExperienceForm = ({experience}:{experience?:Experience}) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center justify-center py-2'>
         <Box className=' md:w-3/5 py-10 space-y-5'>
-
             {message&&<ErrorMessage>{message}</ErrorMessage>}
-
+            
             <TextField.Root {...register('position')} size='3' type='text' variant='soft' placeholder='Enter Position'/>
                 {errors.position?.message && <Text color='red'>{errors.position?.message}</Text> }
             <TextField.Root {...register('company')} size='3' type='text' variant='soft' placeholder='Enter Company'/>
@@ -76,6 +76,7 @@ const ExperienceForm = ({experience}:{experience?:Experience}) => {
             name='description'
             render={({field})=><SimpleMDE{...field}/>}
             />
+            
             {errors.description?.message && <Text color='red'>{errors.description?.message}</Text> }
 
             <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
@@ -90,4 +91,4 @@ const ExperienceForm = ({experience}:{experience?:Experience}) => {
   )
 }
 
-export default ExperienceForm
+export default FormExperience
