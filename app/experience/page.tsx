@@ -9,13 +9,13 @@ import Markdown from 'react-markdown'
 
 const ExperiencePage = async() => {
     const experiences = await prisma.experience.findMany()
+    const images = await prisma.image.findMany()
 
   return (
     <div className='flex flex-col gap-3 items-center py-5'>
-        {experiences.map(experience=>
+        {experiences.map(experience=>            
             <Box key={experience.id} className='p-2 md:w-3/5'>
                 <Card className='flex flex-col'>
-
                     <div>
                         <Flex gap="3" align="center" className='flex justify-center'>
                             <Image
@@ -51,6 +51,11 @@ const ExperiencePage = async() => {
                             <Markdown>
                                 {experience.description}
                             </Markdown>
+                        </div>
+                        <div className=' bg-green-400'>
+                            {images.filter(image=> image.id === experience.id).map(image=>
+                                <p key={image.id}>{image.name}</p>
+                            )}
                         </div>
                     </div>
 

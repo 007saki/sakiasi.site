@@ -3,8 +3,9 @@
 'use client'
 import ErrorMessage from '@/app/components/errorMessage';
 import { experienceSchema, experienceType } from '@/app/schema/experienceSchema';
+import { imageSchema, imageType } from '@/app/schema/imageSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Experience } from '@prisma/client';
+import { Experience, Image } from '@prisma/client';
 import { Box, Button, Text, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import "easymde/dist/easymde.min.css";
@@ -12,16 +13,18 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const SimpleMDE = dynamic(()=>import ('react-simplemde-editor'),{ssr:false})
+const combinedSchema = z.intersection(experienceSchema,imageSchema)
 
-const FormExperience = ({experience}:{experience?:Experience}) => {
+const FormExperience = ({experience, image}:{experience?:Experience, image?:Image}) => {
     const router = useRouter()
 
     const [message, setMessage] = useState('')
 
-    const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType>({
-        resolver: zodResolver(experienceSchema),
+    const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType & imageType>({
+        resolver: zodResolver(combinedSchema),
         mode: 'onChange',
         defaultValues:{
             company: experience?.company,
@@ -29,8 +32,10 @@ const FormExperience = ({experience}:{experience?:Experience}) => {
             employer_logo: experience?.employer_logo || '',
             startDate: experience?.startDate.toISOString().split('T')[0],
             endDate: experience?.endDate?experience?.endDate?.toISOString().split('T')[0] : '',
-            position: experience?.position || '',
-        }
+            position: experience?.position || '' ,
+            google_id: image?.google_id || '',
+            name: image?.name || '',
+        },
     })
 
     const onSubmit=async(data:experienceType)=> {
@@ -39,6 +44,7 @@ const FormExperience = ({experience}:{experience?:Experience}) => {
             startDate: new Date(data.startDate).toISOString(),
             endDate: data.endDate?new Date(data.endDate).toISOString():null
         }
+
         console.log(formattedData)
 
         if(experience){
@@ -84,6 +90,10 @@ const FormExperience = ({experience}:{experience?:Experience}) => {
 
             <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
             {errors.employer_logo?.message && <Text color='red'>{errors.employer_logo?.message}</Text> }
+
+            <TextField.Root {...register('name')} size='3' type='text' variant='soft' placeholder='Enter Image Name'/>
+            <TextField.Root {...register('google_id')} size='3' type='text' variant='soft' placeholder='Enter Google Id'/>
+
 
             <Button type='submit'>Submit</Button>
         </Box>
