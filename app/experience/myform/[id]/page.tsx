@@ -4,7 +4,7 @@
 import React from 'react'
 import { prisma } from '@/prisma/client'
 import { notFound } from 'next/navigation'
-import FormExperience from '../form'
+import FormExperience from '../page'
 
 const ExperienceFormUpdate = async({params}:{params:Promise<{id:string}>}) => {
 
