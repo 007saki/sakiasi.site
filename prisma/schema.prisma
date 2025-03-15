@@ -17,7 +17,6 @@ model Certificate {
   status            String
   category          String
   certificate_id    String?
-  test String?
 }
 
 model Experience {
