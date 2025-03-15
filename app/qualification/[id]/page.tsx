@@ -1,7 +1,5 @@
 
 
-
-
 import { prisma } from '@/prisma/client'
 import { Badge, Text } from '@radix-ui/themes'
 import Image from 'next/image'

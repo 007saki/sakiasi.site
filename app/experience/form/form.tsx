@@ -36,21 +36,31 @@ const FormExperience = ({experience}:{experience?:Experience}) => {
         }
     })
 
-    const onSubmit=async(data:experienceType)=>{
+    const onSubmit=async(data:experienceType)=> {
         const formattedData = {
             ...data,
             startDate: new Date(data.startDate).toISOString(),
             endDate: data.endDate?new Date(data.endDate).toISOString():null
         }
+        console.log(formattedData)
 
-        console.log(formattedData)        
-        try {
-            axios.post('/api/experience/',formattedData)
-            setMessage('Experience was created successfully')
-            router.push('/experience')
-        } catch{
-            setMessage('Failed to create experience')
-        }
+        if(experience){
+            try {
+                const response = await axios.patch(`/api/experience/${experience.id}`,formattedData)
+                setMessage(`Experience was created successfully: ${response.data}`)
+                router.push('/experience')
+            } catch{
+                setMessage('Failed to create experience')
+            }
+        } else {
+            try {
+                const response = await axios.post('/api/experience/',formattedData)
+                setMessage(`Experience was created successfully: ${response.data}`)
+                router.push('/experience')
+            } catch{
+                setMessage('Failed to create experience')
+            }
+        }      
     }
 
   return (

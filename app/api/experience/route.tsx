@@ -28,6 +28,8 @@ export const POST=async(request:NextRequest)=>{
             startDate: body.startDate,
             description: body.description,
             endDate: body.endDate,
+            employer_logo: body.employer_logo,
+            images: body.images
         }
     })
 

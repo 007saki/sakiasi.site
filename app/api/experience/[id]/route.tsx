@@ -22,7 +22,9 @@ export const PATCH=async(request:NextRequest, {params}:{params:Promise<{id:strin
                 description: body.description,
                 endDate: body.endDate,
                 position: body.position,
-                startDate: body.startDate
+                startDate: body.startDate,
+                employer_logo: body.employer_logo,
+                images: body.images
             },
             where: {id:(parseInt(id))}
         })
