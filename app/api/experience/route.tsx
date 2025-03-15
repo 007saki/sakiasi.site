@@ -29,7 +29,13 @@ export const POST=async(request:NextRequest)=>{
             description: body.description,
             endDate: body.endDate,
             employer_logo: body.employer_logo,
-            images: body.images
+            department: body.department,
+            image: {create:
+                {
+                    google_id: body.google_id,
+                    name: body.name
+                }
+            }
         }
     })
 

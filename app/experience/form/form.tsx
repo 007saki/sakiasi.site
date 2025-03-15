@@ -1,6 +1,5 @@
 
 
-
 'use client'
 import ErrorMessage from '@/app/components/errorMessage';
 import { experienceSchema, experienceType } from '@/app/schema/experienceSchema';
@@ -30,9 +29,7 @@ const FormExperience = ({experience}:{experience?:Experience}) => {
             employer_logo: experience?.employer_logo || '',
             startDate: experience?.startDate.toISOString().split('T')[0],
             endDate: experience?.endDate?experience?.endDate?.toISOString().split('T')[0] : '',
-            images: experience?.images || '',
             position: experience?.position || '',
-
         }
     })
 
@@ -87,9 +84,6 @@ const FormExperience = ({experience}:{experience?:Experience}) => {
 
             <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
             {errors.employer_logo?.message && <Text color='red'>{errors.employer_logo?.message}</Text> }
-
-            <TextField.Root {...register('images')} size='3' type='text' variant='soft' placeholder='Enter Image ID'/>
-            {errors.images?.message && <Text color='red'>{errors.images?.message}</Text> }
 
             <Button type='submit'>Submit</Button>
         </Box>
