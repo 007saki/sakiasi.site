@@ -1,7 +1,6 @@
 
 
 
-
 import { prisma } from '@/prisma/client'
 import { Box, Card, Flex, Text } from '@radix-ui/themes'
 import Image from 'next/image'

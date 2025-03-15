@@ -1,9 +1,6 @@
 
 
 
-
-
-
 'use client'
 import ErrorMessage from '@/app/components/errorMessage';
 import { experienceSchema, experienceType } from '@/app/schema/experienceSchema';
@@ -48,7 +45,6 @@ const FormExperience = ({experience}:{experience?:Experience}) => {
 
         console.log(formattedData)        
         try {
-            
             axios.post('/api/experience/',formattedData)
             setMessage('Experience was created successfully')
             router.push('/experience')
