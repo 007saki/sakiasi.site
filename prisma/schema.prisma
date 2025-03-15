@@ -23,11 +23,20 @@ model Experience {
   id            Int       @id @default(autoincrement())
   position      String
   company       String
+  department    String?
   startDate     DateTime
   endDate       DateTime?
   description   String?
   employer_logo String?
-  images        String?
+  image        Image? @relation(fields: [image_id], references: [id])
+  image_id Int?
+}
+
+model Image {
+  id Int @id @default(autoincrement())
+  name String
+  google_id String
+  experience_id Experience[]
 }
 
 model Post {
