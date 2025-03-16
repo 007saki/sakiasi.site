@@ -27,7 +27,7 @@ const Form= ({cert}:{cert?:Certificate}) => {
             status: cert?.status ?? 'In Progress',
             certificate_desc: cert?.certificate_desc ?? '',
             name: cert?.name ?? '',
-          }
+        }
     })
     
     const [status, setStatus] = useState<'Complete'|'In Progress'|string>('Complete')

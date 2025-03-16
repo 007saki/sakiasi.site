@@ -9,7 +9,6 @@ import Markdown from 'react-markdown'
 
 const ExperiencePage = async() => {
     const experiences = await prisma.experience.findMany()
-    const images = await prisma.image.findMany()
 
   return (
     <div className='flex flex-col gap-3 items-center py-5'>
@@ -52,13 +51,7 @@ const ExperiencePage = async() => {
                                 {experience.description}
                             </Markdown>
                         </div>
-                        <div className=' bg-green-400'>
-                            {images.filter(image=> image.id === experience.id).map(image=>
-                                <p key={image.id}>{image.name}</p>
-                            )}
-                        </div>
                     </div>
-
                 </Card>
             </Box>
         )}

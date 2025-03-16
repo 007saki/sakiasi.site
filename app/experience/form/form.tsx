@@ -2,14 +2,11 @@
 
 
 
-
-
 'use client'
 import ErrorMessage from '@/app/components/errorMessage';
 import { experienceSchema, experienceType } from '@/app/schema/experienceSchema';
-import { imageSchema, imageType } from '@/app/schema/imageSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Experience, Image } from '@prisma/client';
+import { Experience } from '@prisma/client';
 import { Box, Button, Text, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import "easymde/dist/easymde.min.css";
@@ -17,28 +14,25 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 const SimpleMDE = dynamic(()=>import ('react-simplemde-editor'),{ssr:false})
-const combinedSchema = z.intersection(experienceSchema,imageSchema)
 
-const ExperienceFormPage = ({experience, image}:{experience?:Experience, image?:Image}) => {
+const ExperienceForm = ({experience}:{experience?:Experience }) => {
+
     const router = useRouter()
-
     const [message, setMessage] = useState('')
 
-    const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType & imageType>({
-        resolver: zodResolver(combinedSchema),
+    const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType>({
+        resolver: zodResolver(experienceSchema),
         mode: 'onChange',
         defaultValues:{
-            company: experience?.company,
+            company: experience?.company || '',
             description: experience?.description || '',
             employer_logo: experience?.employer_logo || '',
-            startDate: experience?.startDate.toISOString().split('T')[0],
-            endDate: experience?.endDate?experience?.endDate?.toISOString().split('T')[0] : '',
+            startDate: experience?.startDate,
+            endDate: experience?.endDate || undefined ,
             position: experience?.position || '' ,
-            google_id: image?.google_id || '',
-            name: image?.name || '',
+            department: experience?.department || '',
         },
     })
 
@@ -79,6 +73,8 @@ const ExperienceFormPage = ({experience, image}:{experience?:Experience, image?:
                 {errors.position?.message && <Text color='red'>{errors.position?.message}</Text> }
             <TextField.Root {...register('company')} size='3' type='text' variant='soft' placeholder='Enter Company'/>
                 {errors.company?.message && <Text color='red'>{errors.company?.message}</Text> }
+            <TextField.Root {...register('department')} size='3' type='text' variant='soft' placeholder='Enter Company'/>
+            {errors.company?.message && <Text color='red'>{errors.company?.message}</Text> }
             <TextField.Root {...register('startDate')} size='3' type='date' variant='soft' placeholder='Enter start date'/>
                 {errors.startDate?.message && <Text color='red'>{errors.startDate?.message}</Text> }
             <TextField.Root {...register('endDate')} size='3' type='date' variant='soft' placeholder='Enter end date'/>
@@ -87,7 +83,7 @@ const ExperienceFormPage = ({experience, image}:{experience?:Experience, image?:
             <Controller
             control={control}
             name='description'
-            render={({field})=><SimpleMDE{...field}/>}
+            render={({field})=><SimpleMDE value={field.value!} />}
             />
             
             {errors.description?.message && <Text color='red'>{errors.description?.message}</Text> }
@@ -95,14 +91,10 @@ const ExperienceFormPage = ({experience, image}:{experience?:Experience, image?:
             <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
             {errors.employer_logo?.message && <Text color='red'>{errors.employer_logo?.message}</Text> }
 
-            <TextField.Root {...register('name')} size='3' type='text' variant='soft' placeholder='Enter Image Name'/>
-            <TextField.Root {...register('google_id')} size='3' type='text' variant='soft' placeholder='Enter Google Id'/>
-
-
             <Button type='submit'>Submit</Button>
         </Box>
     </form>
   )
 }
 
-export default ExperienceFormPage
+export default ExperienceForm
