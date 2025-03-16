@@ -8,7 +8,7 @@ import ExperienceForm from './form'
 const ExperienceFormPage = () => {
   return (
     <div>
-      <ExperienceForm />
+      <ExperienceForm/>
     </div>
   )
 }

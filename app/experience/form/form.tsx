@@ -1,12 +1,12 @@
 
 
 
-
 'use client'
 import ErrorMessage from '@/app/components/errorMessage';
 import { experienceSchema, experienceType } from '@/app/schema/experienceSchema';
+import { imageSchema, imageType } from '@/app/schema/imageSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Experience } from '@prisma/client';
+import { Experience, Image } from '@prisma/client';
 import { Box, Button, Text, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import "easymde/dist/easymde.min.css";
@@ -14,16 +14,20 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const SimpleMDE = dynamic(()=>import ('react-simplemde-editor'),{ssr:false})
+export const combine = z.intersection(experienceSchema,imageSchema)
 
-const ExperienceForm = ({experience}:{experience?:Experience }) => {
+export type combineType = z.infer<typeof combine>
+const ExperienceForm = ({experience, image}:{experience?:Experience, image?:Image}) => {
 
     const router = useRouter()
     const [message, setMessage] = useState('')
 
-    const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType>({
-        resolver: zodResolver(experienceSchema),
+
+    const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType & imageType>({
+        resolver: zodResolver(combine),
         mode: 'onChange',
         defaultValues:{
             company: experience?.company || '',
@@ -33,6 +37,8 @@ const ExperienceForm = ({experience}:{experience?:Experience }) => {
             endDate: experience?.endDate || undefined ,
             position: experience?.position || '' ,
             department: experience?.department || '',
+            google_id: image?.google_id || '',
+            name: image?.name || '',
         },
     })
 
@@ -90,6 +96,12 @@ const ExperienceForm = ({experience}:{experience?:Experience }) => {
 
             <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
             {errors.employer_logo?.message && <Text color='red'>{errors.employer_logo?.message}</Text> }
+
+            <TextField.Root {...register('name')} size='3' type='text' variant='soft' placeholder='Enter Image Name'/>
+            {errors.name?.message && <Text color='red'>{errors.name?.message}</Text> }
+
+            <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
+            {errors.google_id?.message && <Text color='red'>{errors.google_id?.message}</Text> }
 
             <Button type='submit'>Submit</Button>
         </Box>
