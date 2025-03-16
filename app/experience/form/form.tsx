@@ -5,7 +5,6 @@
 import ErrorMessage from '@/app/components/errorMessage';
 import { experienceSchema, experienceType } from '@/app/schema/experienceSchema';
 import { imageSchema, imageType } from '@/app/schema/imageSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Experience, Image } from '@prisma/client';
 import { Box, Button, Text, TextField } from '@radix-ui/themes';
 import axios from 'axios';
@@ -17,6 +16,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 const SimpleMDE = dynamic(()=>import ('react-simplemde-editor'),{ssr:false})
+
 export const combine = z.intersection(experienceSchema,imageSchema)
 
 export type combineType = z.infer<typeof combine>
@@ -25,28 +25,14 @@ const ExperienceForm = ({experience, image}:{experience?:Experience, image?:Imag
     const router = useRouter()
     const [message, setMessage] = useState('')
 
+    const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType & imageType>()
 
-    const {register,control, handleSubmit, formState:{errors}} = useForm<experienceType & imageType>({
-        resolver: zodResolver(combine),
-        mode: 'onChange',
-        defaultValues:{
-            company: experience?.company || '',
-            description: experience?.description || '',
-            employer_logo: experience?.employer_logo || '',
-            startDate: experience?.startDate,
-            endDate: experience?.endDate || undefined ,
-            position: experience?.position || '' ,
-            department: experience?.department || '',
-            google_id: image?.google_id || '',
-            name: image?.name || '',
-        },
-    })
+    const onSubmit=async(data:experienceType & imageType)=> {
 
-    const onSubmit=async(data:experienceType)=> {
         const formattedData = {
             ...data,
             startDate: new Date(data.startDate).toISOString(),
-            endDate: data.endDate?new Date(data.endDate).toISOString():null
+            endDate: data.endDate&&new Date(data.endDate).toISOString()
         }
 
         console.log(formattedData)
@@ -55,9 +41,11 @@ const ExperienceForm = ({experience, image}:{experience?:Experience, image?:Imag
             try {
                 const response = await axios.patch(`/api/experience/${experience.id}`,formattedData)
                 setMessage(`Experience was created successfully: ${response.data}`)
+                console.log(`${response.data}`)
                 router.push('/experience')
             } catch{
                 setMessage('Failed to create experience')
+                console.log('Fail to update')
             }
         } else {
             try {
@@ -75,32 +63,32 @@ const ExperienceForm = ({experience, image}:{experience?:Experience, image?:Imag
         <Box className=' md:w-3/5 py-10 space-y-5'>
             {message&&<ErrorMessage>{message}</ErrorMessage>}
             
-            <TextField.Root {...register('position')} size='3' type='text' variant='soft' placeholder='Enter Position'/>
+            <TextField.Root defaultValue={experience?.position} {...register('position')} size='3' type='text' variant='soft' placeholder='Enter Position'/>
                 {errors.position?.message && <Text color='red'>{errors.position?.message}</Text> }
-            <TextField.Root {...register('company')} size='3' type='text' variant='soft' placeholder='Enter Company'/>
+            <TextField.Root defaultValue={experience?.company} {...register('company')} size='3' type='text' variant='soft' placeholder='Enter Company'/>
                 {errors.company?.message && <Text color='red'>{errors.company?.message}</Text> }
-            <TextField.Root {...register('department')} size='3' type='text' variant='soft' placeholder='Enter Company'/>
+            <TextField.Root defaultValue={experience?.department || ''} {...register('department')} size='3' type='text' variant='soft' placeholder='Enter Department'/>
             {errors.company?.message && <Text color='red'>{errors.company?.message}</Text> }
-            <TextField.Root {...register('startDate')} size='3' type='date' variant='soft' placeholder='Enter start date'/>
+            <TextField.Root defaultValue={experience?.startDate.toISOString().split('T')[0]} {...register('startDate')} size='3' type='date' variant='soft' placeholder='Enter start date'/>
                 {errors.startDate?.message && <Text color='red'>{errors.startDate?.message}</Text> }
-            <TextField.Root {...register('endDate')} size='3' type='date' variant='soft' placeholder='Enter end date'/>
-            {errors.endDate?.message && <Text color='red'>{errors.endDate?.message}</Text> }
+            <TextField.Root defaultValue={experience?.endDate?.toISOString().split('T')[0]} {...register('endDate')} size='3' type='date' variant='soft' placeholder='Enter end date'/>
+                {errors.endDate?.message && <Text color='red'>{errors.endDate?.message}</Text> }
             
             <Controller
             control={control}
             name='description'
+            defaultValue={experience?.description}
             render={({field})=><SimpleMDE value={field.value!} />}
             />
-            
             {errors.description?.message && <Text color='red'>{errors.description?.message}</Text> }
 
-            <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
+            <TextField.Root defaultValue={experience?.employer_logo || ''} {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
             {errors.employer_logo?.message && <Text color='red'>{errors.employer_logo?.message}</Text> }
 
-            <TextField.Root {...register('name')} size='3' type='text' variant='soft' placeholder='Enter Image Name'/>
+            <TextField.Root defaultValue={image?.name} {...register('name')} size='3' type='text' variant='soft' placeholder='Enter Image Name'/>
             {errors.name?.message && <Text color='red'>{errors.name?.message}</Text> }
 
-            <TextField.Root {...register('employer_logo')} size='3' type='text' variant='soft' placeholder='Enter Employer Logo'/>
+            <TextField.Root defaultValue={image?.google_id} {...register('google_id')} size='3' type='text' variant='soft' placeholder='Enter Google Id'/>
             {errors.google_id?.message && <Text color='red'>{errors.google_id?.message}</Text> }
 
             <Button type='submit'>Submit</Button>
