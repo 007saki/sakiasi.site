@@ -4,7 +4,7 @@
 
 import { prisma } from '@/prisma/client'
 import { notFound } from 'next/navigation'
-import ExperienceFormPage from '../formPage'
+// import ExperienceFormPage from '../formPage'
 
 const ExperienceDetailsForm = async({params}:{params:Promise<{id:string}>}) => {
     const id = (await params).id
@@ -20,7 +20,8 @@ const ExperienceDetailsForm = async({params}:{params:Promise<{id:string}>}) => {
 
   return (
     <div>
-        <ExperienceFormPage experience={experience} image={image}/>
+      {experience.image?.name}
+        {/* <ExperienceFormPage experience={experience} image={image}/> */}
     </div>
   )
 }
