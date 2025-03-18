@@ -4,11 +4,14 @@
 import { prisma } from '@/prisma/client'
 import { Box, Card, Flex, Text } from '@radix-ui/themes'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 import { SlCalender } from 'react-icons/sl'
 import Markdown from 'react-markdown'
 
 const ExperiencePage = async() => {
+
     const experiences = await prisma.experience.findMany()
+    if(!experiences) return notFound()
 
   return (
     <div className='flex flex-col gap-3 items-center py-5'>
@@ -21,7 +24,7 @@ const ExperiencePage = async() => {
                                 height={100}
                                 width={100}
                                 alt='Logo'
-                                style={{width:50 , height:50}}
+                                style={{width:100 , height:100}}
                                 src={`https://drive.google.com/uc?id=${experience?.employer_logo}`}
                             />
                             <Box>
