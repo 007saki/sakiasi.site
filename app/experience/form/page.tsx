@@ -3,14 +3,14 @@
 
 
 import React from 'react'
-import ExperienceForm from './form'
+import ExperienceFormPage from './formPage'
 
-const ExperienceFormPage = () => {
+const ExperiencePage = () => {
   return (
     <div>
-      <ExperienceForm/>
+      <ExperienceFormPage/>
     </div>
   )
 }
 
-export default ExperienceFormPage
+export default ExperiencePage
