@@ -11,16 +11,16 @@ const ExperienceDetailsForm = async({params}:{params:Promise<{id:string}>}) => {
 
     const experience = await prisma.experience.findUnique({
       where:{id:(parseInt(id))},
-      include:{image:true},
+      // include:{image:true},
     })
     if(!experience) return notFound();
 
-      const image = await prisma.image.findUnique({where:{id:experience.image?.id}});
-      if(!image) return notFound();
+      // const image = await prisma.image.findUnique({where:{id:experience.image?.id}});
+      // if(!image) return notFound();
 
   return (
     <div>
-      {experience.image?.name}
+      {experience.company}
         {/* <ExperienceFormPage experience={experience} image={image}/> */}
     </div>
   )
