@@ -4,6 +4,7 @@
 
 import { prisma } from '@/prisma/client'
 import { notFound } from 'next/navigation'
+import ExperienceFormPage from '../formPage'
 // import ExperienceFormPage from '../formPage'
 
 const ExperienceDetailsForm = async({params}:{params:Promise<{id:string}>}) => {
@@ -11,7 +12,7 @@ const ExperienceDetailsForm = async({params}:{params:Promise<{id:string}>}) => {
 
     const experience = await prisma.experience.findUnique({
       where:{id:(parseInt(id))},
-      // include:{image:true},
+      include:{image:true},
     })
     if(!experience) return notFound();
 
@@ -21,7 +22,7 @@ const ExperienceDetailsForm = async({params}:{params:Promise<{id:string}>}) => {
   return (
     <div>
       {experience.company}
-        {/* <ExperienceFormPage experience={experience} image={image}/> */}
+        <ExperienceFormPage experience={experience} image={experience.image||undefined}/>
     </div>
   )
 }
