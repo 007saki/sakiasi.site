@@ -10,15 +10,29 @@ import { Controller, useForm } from 'react-hook-form'
 import "easymde/dist/easymde.min.css";
 import { Experience, Image } from '@prisma/client'
 import { imageType } from '@/app/schema/imageSchema'
+import axios from 'axios'
 
 const SimpleMDE = dynamic(()=>import('react-simplemde-editor'),{ssr:false})
 
 const ExperienceFormPage = ({experience, image}:{experience?:Experience, image?:Image}) => {
 
-    const { register, control} = useForm<experienceType & imageType>()
+    const { register, control, handleSubmit} = useForm<experienceType & imageType>()
+
+    const onSubmit=async(newExperience:experienceType)=>{
+
+      const formattedData = {
+        ...newExperience,
+        startDate: new Date(newExperience.startDate).toISOString(),
+        endDate: new Date(newExperience.endDate).toISOString()
+      }
+
+      // console.log(formattedData)
+      const res = await axios.patch(`/api/experience/${experience?.id}`,formattedData)
+      console.log(res.data)
+    }
 
   return (
-    <form className='flex flex-col gap-3 p-5 justify-center items-center'>
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3 p-5 justify-center items-center'>
         <div className='flex flex-col gap-3 w-3/5'>
             <TextField.Root defaultValue={experience?.position} size={'3'} color='purple' variant='soft' {...register('position')} type='text' placeholder='Enter Position' />
             <TextField.Root defaultValue={experience?.company} size={'3'} color='purple' variant='soft' {...register('company')} type='text' placeholder='Enter Company' />
