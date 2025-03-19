@@ -1,7 +1,9 @@
+
+
+
 import { experienceSchema } from "@/app/schema/experienceSchema";
 import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-
 
 
 export const PATCH=async(request:NextRequest, {params}:{params:Promise<{id:string}>})=>{
@@ -25,10 +27,7 @@ export const PATCH=async(request:NextRequest, {params}:{params:Promise<{id:strin
                 startDate: body.startDate,
                 employer_logo: body.employer_logo,
                 department: body.department,
-                image:{create:{
-                    google_id: body.google_id,
-                    name: body.name
-                }}
+                
             },
             where: {id:(parseInt(id))}
         })

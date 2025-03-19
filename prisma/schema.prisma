@@ -31,8 +31,8 @@ model Experience {
   endDate       DateTime?
   description   String?
   employer_logo String?
-  image_detail        ImageDetail? @relation(fields: [image_id], references: [id])
-  image_id Int?
+  image_detail        ImageDetail? @relation(fields: [image_detail_id], references: [id])
+  image_detail_id Int?
 }
 
 model Image {
