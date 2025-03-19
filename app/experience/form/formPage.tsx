@@ -1,6 +1,4 @@
 
-
-
 'use client'
 import { experienceType } from '@/app/schema/experienceSchema'
 import { Button, TextField } from '@radix-ui/themes'
@@ -23,7 +21,8 @@ const ExperienceFormPage = ({experience, image}:{experience?:Experience, image?:
       const formattedData = {
         ...newExperience,
         startDate: new Date(newExperience.startDate).toISOString(),
-        endDate: new Date(newExperience.endDate).toISOString()
+        endDate: new Date(newExperience.endDate).toISOString(),
+        
       }
 
       if(experience){
@@ -36,10 +35,11 @@ const ExperienceFormPage = ({experience, image}:{experience?:Experience, image?:
       }
       {
         try {
-          await axios.post('/api/experience',formattedData)
+          await axios.post('/api/experience/',formattedData)
           console.log('Post successful')
+          console.log(formattedData)
         } catch {
-          console.log('Failed to post')
+          console.log('failed to post')
         }
       }
 
