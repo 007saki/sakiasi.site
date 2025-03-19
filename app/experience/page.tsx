@@ -21,10 +21,10 @@ const ExperiencePage = async() => {
                     <div>
                         <Flex gap="3" align="center" className='flex justify-center'>
                             <Image
-                                height={100}
-                                width={100}
+                                height={60}
+                                width={60}
                                 alt='Logo'
-                                style={{width:100 , height:100}}
+                                style={{width:60 , height:60}}
                                 src={`https://drive.google.com/uc?id=${experience?.employer_logo}`}
                             />
                             <Box>
