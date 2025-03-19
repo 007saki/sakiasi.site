@@ -26,9 +26,23 @@ const ExperienceFormPage = ({experience, image}:{experience?:Experience, image?:
         endDate: new Date(newExperience.endDate).toISOString()
       }
 
-      // console.log(formattedData)
-      const res = await axios.patch(`/api/experience/${experience?.id}`,formattedData)
-      console.log(res.data)
+      if(experience){
+        try {
+          await axios.patch(`/api/experience/${experience?.id}`,formattedData)
+          console.log(formattedData)
+        } catch {
+          console.log('Fail to patch')
+        }
+      }
+      {
+        try {
+          await axios.post('/api/experience',formattedData)
+          console.log('Post successful')
+        } catch {
+          console.log('Failed to post')
+        }
+      }
+
     }
 
   return (
