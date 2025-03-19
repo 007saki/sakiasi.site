@@ -1,3 +1,6 @@
+
+
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -34,16 +37,15 @@ model Experience {
 
 model Image {
   id Int @id @default(autoincrement())
-  google_id String
+  google_id String?
   image_detail ImageDetail[]
 }
 
 model ImageDetail {
   id Int @id @default(autoincrement())
-  name String
-  image_description String
+  name String?
+  image_description String?
   experience_id Experience[]
-  
   image Image @relation(fields: [image_id], references: [id])
   image_id Int
 }
