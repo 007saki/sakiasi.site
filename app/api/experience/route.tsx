@@ -1,3 +1,6 @@
+
+
+
 import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,27 +14,31 @@ export const GET=async()=>{
     }
 }
 
-export const POST=async(request:NextRequest)=>{
-    const body = await request.json()
 
-    //send to db
+export const POST = async (request: NextRequest) => {
+    const body = await request.json();
+
+    // Send to DB
     const createExperience = await prisma.experience.create({
-        data:{
-            company: body.company,
+        data: {
             position: body.position,
-            startDate: body.startDate,
+            company: body.company,
             description: body.description,
+            startDate: body.startDate,
             endDate: body.endDate,
-            employer_logo: body.employer_logo,
             department: body.department,
-            image: {create:
-                {
-                    google_id: body.google_id,
-                    name: body.name
-                }
+            employer_logo: body.employer_logo,
+            image_to_experience: {
+                create: body.src.map((src: string) => ({
+                    image: {
+                        create: {
+                            src: src
+                        }
+                    }
+                }))
             }
         }
-    })
+    });
 
-    return NextResponse.json(createExperience,{status:201})
-}
+    return NextResponse.json(createExperience, { status: 201 });
+};

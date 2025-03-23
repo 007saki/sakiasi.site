@@ -31,24 +31,23 @@ model Experience {
   endDate       DateTime?
   description   String?
   employer_logo String?
-  image_detail        ImageDetail? @relation(fields: [image_detail_id], references: [id])
-  image_detail_id Int?
+  image_to_experience ImageToExperience[]
 }
 
 model Image {
   id Int @id @default(autoincrement())
-  google_id String?
-  image_detail ImageDetail[]
+  src String
+  image_to_experience ImageToExperience[]
 }
 
-model ImageDetail {
+model ImageToExperience {
   id Int @id @default(autoincrement())
-  name String?
-  image_description String?
-  experience_id Experience[]
-  image Image @relation(fields: [image_id], references: [id])
+  experience Experience @relation(fields: [experience_id],references: [id])
+  experience_id Int
+  image Image @relation(fields: [image_id],references: [id])
   image_id Int
 }
+
 
 model Post {
   id        Int     @id @default(autoincrement())
