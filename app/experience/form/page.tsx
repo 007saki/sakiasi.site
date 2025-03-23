@@ -4,8 +4,12 @@
 'use client'
 import { Button, TextField } from '@radix-ui/themes'
 import axios from 'axios'
+import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
-import { useFieldArray, useForm } from 'react-hook-form'
+import { Controller, useFieldArray, useForm } from 'react-hook-form'
+import "easymde/dist/easymde.min.css";
+
+const SimpleMDE = dynamic(()=>import('react-simplemde-editor'),{ssr:false}) 
 
 interface ExperienceProps {
     position: string;
@@ -62,7 +66,11 @@ const ExperiencePage = () => {
             <TextField.Root {...register('department')} size='3' placeholder='Enter Department' variant='soft' />
             <TextField.Root {...register('startDate')} size='3' type='date' placeholder='Enter Start Date' variant='soft' />
             <TextField.Root {...register('endDate')} size='3' type='date' placeholder='Enter End Date' variant='soft' />
-            <TextField.Root {...register('description')} size='3' placeholder='Enter Description' variant='soft' />
+            <Controller
+            control={control}
+            name='description'
+            render={({field})=><SimpleMDE placeholder='Ender Description' {...field}/>}
+            />
             <TextField.Root {...register('employer_logo')} size='3' placeholder='Logo URL' variant='soft' />
             
             <div className='flex flex-col gap-3'>
