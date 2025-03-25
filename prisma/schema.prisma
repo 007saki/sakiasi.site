@@ -14,15 +14,16 @@ model User {
   id Int @id @default(autoincrement())
   name String
   email String @unique
-  qualification Qualification[]
-  experience Experience[]
-  references References[]
-  employer Employer[]
-  project Project[]
-  application Application[]
-  blog Blog[]
-  tou TermsOfUse[]
   about About[]
+  tou TermsOfUse[]
+  blog Blog[]
+  application Application[]
+  project Project[]
+  references References[]
+  experience Experience[]
+  employer Employer[]
+  education Education[]
+  qualification Qualification[]
 }
 
 model About {
@@ -109,6 +110,8 @@ model Education {
   startDate DateTime
   endDate DateTime?
   qualification Qualification[]
+  user User? @relation(fields: [userId],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  userId Int?
 }
 
 model Institution {
@@ -130,7 +133,6 @@ model Qualification {
   instituteId Int?
   education Education? @relation(fields: [educationId],references: [id],onDelete: Cascade,onUpdate: Cascade)
   educationId Int?
-
 }
 
 enum QualificationType {
