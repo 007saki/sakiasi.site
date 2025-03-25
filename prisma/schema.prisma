@@ -10,62 +10,130 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Certificate {
-  id                Int      @id @default(autoincrement())
-  certificate_desc  String
-  date              DateTime
-  institution       String
-  name              String
-  qualificationType String
-  status            String
-  category          String
-  certificate_id    String?
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  qualification Qualification[]
+  experience Experience[]
+  references References[]
+  employer Employer[]
+  project Project[]
+  application Application[]
+  blog Blog[]
+  tou TermsOfUse[]
+  about About[]
+}
+
+model About {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  author User @relation(fields: [authorId],references: [id],onDelete: Cascade, onUpdate: Cascade)
+  authorId Int
+}
+
+model TermsOfUse {
+  id Int @id @default(autoincrement())
+  title String
+  content String?
+  author User @relation(fields: [authorId],references: [id],onDelete: Cascade, onUpdate: Cascade)
+  authorId Int
+}
+
+model Blog {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  category String?
+  published Boolean @default(false)
+  user User? @relation(fields: [userId],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  userId Int?
+}
+
+model Application {
+  id Int @id @default(autoincrement())
+  name String
+  link String
+  description String?
+  user User? @relation(fields: [userId],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  userId Int?
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+  name String @unique
+  description String?
+  user User? @relation(fields: [userId],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  userId Int?
+}
+
+model References {
+  id Int @id @default(autoincrement())
+  name String
+  email String? @unique
+  contact String?
+  position String?
+  employer String?
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId Int?
 }
 
 model Experience {
-  id            Int       @id @default(autoincrement())
-  position      String
-  company       String
-  department    String?
-  startDate     DateTime
-  endDate       DateTime?
-  description   String?
-  employer_logo String?
-  image_to_experience ImageToExperience[]
-}
-
-model Image {
   id Int @id @default(autoincrement())
-  src String
-  image_to_experience ImageToExperience[]
+  startDate DateTime
+  endDate DateTime?
+  responsibilities String?
+  images String?
+  achievement String?
+  user User? @relation(fields: [userId],references: [id], onDelete: Cascade, onUpdate: Cascade) 
+  userId Int?
+  employer Employer[]
 }
 
-model ImageToExperience {
+model Employer {
   id Int @id @default(autoincrement())
-  experience Experience @relation(fields: [experience_id],references: [id])
-  experience_id Int
-  image Image @relation(fields: [image_id],references: [id])
-  image_id Int
+  name String
+  email String? @unique
+  address String?
+  contact String?
+  experience Experience? @relation(fields: [experienceId],references: [id],onDelete: Cascade, onUpdate: Cascade)
+  experienceId Int?
+  user User? @relation(fields: [userId],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  userId Int?
 }
 
-
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  Int?
-  User      User?   @relation(fields: [authorId], references: [id])
+model Education {
+  id Int @id @default(autoincrement())
+  institution Institution[]
+  startDate DateTime
+  endDate DateTime?
+  qualification Qualification[]
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  Post  Post[]
+model Institution {
+  id Int @id @default(autoincrement())
+  name String @unique
+  location String?
+  certificate Qualification[]
+  education Education? @relation(fields: [educationId],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  educationId Int?
 }
 
-enum Status {
-  COMPLETE
-  IN_PROGRESS
+model Qualification {
+  id Int @id @default(autoincrement())
+  name String
+  type QualificationType @default(PROFESSIONAL_CERTIFICATE)
+  owner User? @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ownerId Int?
+  institute Institution? @relation(fields: [instituteId],references: [id],onDelete: Cascade, onUpdate: Cascade)
+  instituteId Int?
+  education Education? @relation(fields: [educationId],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  educationId Int?
+
+}
+
+enum QualificationType {
+  BACHELORS_DEGREE
+  PROFESSIONAL_CERTIFICATE
 }

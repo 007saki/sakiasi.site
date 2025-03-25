@@ -1,4 +1,3 @@
-import { experienceSchema } from "@/app/schema/experienceSchema";
 import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,32 +7,16 @@ export const PATCH=async(request:NextRequest, {params}:{params:Promise<{id:strin
     const id = (await params).id
     const body = await request.json()
     
-    const partialSchema = experienceSchema.partial()
-    const validation = partialSchema.safeParse(body)
-    
-    if(!validation.success){
-        return NextResponse.json(validation.error.errors,{status:400})
-    }
-
     try {
         const updatedExperience = await prisma.experience.update({
             data:{
+                position: body.position,
                 company: body.company,
                 description: body.description,
-                endDate: body.endDate,
-                position: body.position,
                 startDate: body.startDate,
-                employer_logo: body.employer_logo,
+                endDate: body.endDate,
                 department: body.department,
-                image_to_experience:{
-                    create:{
-                        image:{
-                            create:{
-                                src: body.src
-                            }
-                        }
-                    }
-                }
+                employer_logo: body.employer_logo,
             },
             where: {id:(parseInt(id))}
         })
